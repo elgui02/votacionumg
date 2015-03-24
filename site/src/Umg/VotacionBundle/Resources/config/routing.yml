@@ -1,0 +1,3 @@
+umg_votacion_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: UmgVotacionBundle:Default:index }
