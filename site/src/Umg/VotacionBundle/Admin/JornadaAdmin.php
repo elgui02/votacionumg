@@ -21,6 +21,6 @@ class JornadaAdmin extends Admin
     protected function ConfigureListFields(ListMapper $listMapper) 
     {
         $listMapper
-                ->add('Jornada');
+                ->addIdentifier('Jornada');
     }
 }
