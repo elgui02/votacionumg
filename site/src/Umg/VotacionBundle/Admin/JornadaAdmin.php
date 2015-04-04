@@ -1,4 +1,5 @@
 <?php
+
 namespace Umg\VotacionBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
@@ -11,16 +12,19 @@ class JornadaAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-                ->add('Jornada');
+            ->add('Jornada')
+        ;
     }
     protected function configureDatagridFilters(DatagridMapper $datagridMapper) 
     {
         $datagridMapper
-                ->add('Jornada');
+            ->add('Jornada')
+        ;
     }
     protected function ConfigureListFields(ListMapper $listMapper) 
     {
         $listMapper
-                ->addIdentifier('Jornada');
+            ->addIdentifier('Jornada')
+        ;
     }
 }

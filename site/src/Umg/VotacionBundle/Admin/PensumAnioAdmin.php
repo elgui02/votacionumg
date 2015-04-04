@@ -7,24 +7,27 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 
-class PensumAdmin extends Admin
+class PensumAnioAdmin extends Admin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('Anio')
+            ->add('Curso_id')
+            ->add('Pensum_id')
         ;
     }
     protected function configureDatagridFilters(DatagridMapper $datagridMapper) 
     {
         $datagridMapper
-            ->add('Anio')
+            ->add('Curso_id')
+            ->add('Pensum_id')
         ;
     }
     protected function ConfigureListFields(ListMapper $listMapper) 
     {
         $listMapper
-            ->addIdentifier('Anio')
+            ->addIdentifier('Curso_id')
+            ->add('Pensum_id')
         ;
     }
 }
