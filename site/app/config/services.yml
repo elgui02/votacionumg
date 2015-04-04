@@ -4,8 +4,4 @@ parameters:
 #    parameter_name: value
 
 services:
-sonata.admin.grupo:
-        class: Umg\VotacionBundle\Admin\JornadaAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: Administración, label: Jornada }
-        arguments: [null, Umg\VotacionBundle\Entity\Jornada, UmgVotacionBundle:JornadaAdmin]
+    
