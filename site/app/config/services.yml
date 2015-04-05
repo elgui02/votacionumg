@@ -49,8 +49,20 @@ services:
     umg_votacion.CarreraCursos:
         class: Umg\VotacionBundle\Admin\CarreraCursoAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Carrera", label: "Asignación Cursos" }
+            - { name: sonata.admin, manager_type: orm, group: "Cursos", label: "Asignación Cursos a Carrera" }
         arguments: [null, Umg\VotacionBundle\Entity\CarreraCurso, UmgVotacionBundle:UsuarioAdmin]    
+        
+    umg_votacion.CatedraticoCursos:
+        class: Umg\VotacionBundle\Admin\CatedraticoCursoAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Cursos", label: "Asignación Catedratico a Cursos" }
+        arguments: [null, Umg\VotacionBundle\Entity\CatedraticoCurso, UmgVotacionBundle:UsuarioAdmin]           
+        
+    umg_votacion.AlumnoCurso:
+        class: Umg\VotacionBundle\Admin\AlumnoCursoAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Cursos", label: "Asignación Alumnos a Cursos" }
+        arguments: [null, Umg\VotacionBundle\Entity\AlumnoCurso, UmgVotacionBundle:UsuarioAdmin]
         
     umg_votacion.Alumno:
         class: Umg\VotacionBundle\Admin\AlumnoAdmin
@@ -93,3 +105,9 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: "Preguntas", label: "Opcion" }
         arguments: [null, Umg\VotacionBundle\Entity\Opcion, UmgVotacionBundle:UsuarioAdmin]
+        
+    umg_votacion.Respuestum:
+        class: Umg\VotacionBundle\Admin\RespuestumAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Preguntas", label: "Respuesta" }
+        arguments: [null, Umg\VotacionBundle\Entity\Respuestum, UmgVotacionBundle:UsuarioAdmin]
