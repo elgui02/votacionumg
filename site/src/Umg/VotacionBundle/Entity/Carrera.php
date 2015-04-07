@@ -129,4 +129,8 @@ class Carrera
     {
         return array('id', 'Carrera');
     }
+    
+    public function __toString() {
+        return $this->Carrera;
+    }
 }

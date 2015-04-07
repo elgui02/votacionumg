@@ -12,22 +12,23 @@ class AlumnoCursoAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('Alumno_id')
-            ->add('CatedraticoCurso_id')
+            ->add('alumno')
+            ->add('catedraticoCurso')
         ;
     }
     protected function configureDatagridFilters(DatagridMapper $datagridMapper) 
     {
         $datagridMapper
-            ->add('Alumno_id')
-            ->add('CatedraticoCurso_id')
+            ->add('alumno')
+            ->add('catedraticoCurso')
         ;
     }
     protected function ConfigureListFields(ListMapper $listMapper) 
     {
         $listMapper
-            ->addIdentifier('Alumno_id')
-            ->add('CatedraticoCurso_id')
+            ->addIdentifier('id')
+            ->add('alumno')
+            ->add('catedraticoCurso')
         ;
     }
 }

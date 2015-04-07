@@ -129,4 +129,8 @@ class Jornada
     {
         return array('id', 'Jornada');
     }
+    
+    public function __toString() {
+        return $this->Jornada;
+    }
 }

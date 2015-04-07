@@ -12,22 +12,23 @@ class PensumAnioAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('Curso_id')
-            ->add('Pensum_id')
+            ->add('curso')
+            ->add('pensum')
         ;
     }
     protected function configureDatagridFilters(DatagridMapper $datagridMapper) 
     {
         $datagridMapper
-            ->add('Curso_id')
-            ->add('Pensum_id')
+            ->add('curso')
+            ->add('pensum')
         ;
     }
     protected function ConfigureListFields(ListMapper $listMapper) 
     {
         $listMapper
-            ->addIdentifier('Curso_id')
-            ->add('Pensum_id')
+            ->addIdentifier('id')
+            ->add('curso')
+            ->add('pensum')
         ;
     }
 }

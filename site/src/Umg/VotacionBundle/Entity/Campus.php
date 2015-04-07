@@ -129,4 +129,8 @@ class Campus
     {
         return array('id', 'Campus');
     }
+    
+    public function __toString() {
+        return $this->Campus;
+    }
 }

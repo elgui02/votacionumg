@@ -172,4 +172,8 @@ class Catedratico
     {
         return array('id', 'Nombre');
     }
+    
+    public function __toString() {
+        return $this->Nombre;
+    }
 }

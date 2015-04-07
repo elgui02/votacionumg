@@ -15,7 +15,7 @@ class EvaluacionAdmin extends Admin
             ->add('Activa')
             ->add('FechaHora')
             ->add('FechaHoraFinal')
-            ->add('CampusCarrera_id')                
+            ->add('campusCarrera')                
         ;
     }
     protected function configureDatagridFilters(DatagridMapper $datagridMapper) 
@@ -24,16 +24,17 @@ class EvaluacionAdmin extends Admin
             ->add('Activa')
             ->add('FechaHora')
             ->add('FechaHoraFinal')
-            ->add('CampusCarrera_id')  
+            ->add('campusCarrera')  
         ;
     }
     protected function ConfigureListFields(ListMapper $listMapper) 
     {
         $listMapper
-            ->addIdentifier('Activa')
+            ->addIdentifier('id')
+            ->add('Activar')
             ->add('FechaHora')
             ->add('FechaHoraFinal')
-            ->add('CampusCarrera_id')  
+            ->add('campusCarrera')  
         ;
     }
 }

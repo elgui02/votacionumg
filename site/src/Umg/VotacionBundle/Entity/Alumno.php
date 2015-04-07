@@ -157,4 +157,8 @@ class Alumno
     {
         return array('id', 'Nombre', 'Carne');
     }
+    
+    public function __toString() {
+        return $this->Nombre;
+    }
 }

@@ -13,24 +13,25 @@ class PreguntumAdmin extends Admin
     {
         $formMapper
             ->add('Pregunta')
-            ->add('TipoPregunta_id')
-            ->add('Evaluacion_id')                               
+            ->add('tipoPreguntum')
+            ->add('evaluacion')                               
         ;
     }
     protected function configureDatagridFilters(DatagridMapper $datagridMapper) 
     {
         $datagridMapper
             ->add('Pregunta')
-            ->add('TipoPregunta_id')
-            ->add('Evaluacion_id')                
+            ->add('tipoPreguntum')
+            ->add('evaluacion')              
         ;
     }
     protected function ConfigureListFields(ListMapper $listMapper) 
     {
         $listMapper
-            ->addIdentifier('Pregunta')
-            ->add('TipoPregunta_id')
-            ->add('Evaluacion_id')                
+            ->addIdentifier('id')
+            ->add('Pregunta')
+            ->add('tipoPreguntum')
+            ->add('evaluacion')                
         ;
     }
 }
