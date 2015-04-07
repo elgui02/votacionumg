@@ -76,7 +76,6 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: Umg\VotacionBundle\Entity\Usuario
-    user_class: Umg\VotacionBundle\Entity\Jornada
     group:
         group_class: Umg\VotacionBundle\Entity\Grupo
         
