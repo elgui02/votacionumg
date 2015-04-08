@@ -13,8 +13,8 @@ class PreguntumAdmin extends Admin
     {
         $formMapper
             ->add('Pregunta')
-            ->add('tipoPreguntum')
-            ->add('evaluacion')                               
+            ->add('tipoPreguntum', 'sonata_type_model', array(), array('insert' => 'standard'))
+            ->add('evaluacion', 'sonata_type_model', array(), array('insert' => 'standard'))                               
         ;
     }
     protected function configureDatagridFilters(DatagridMapper $datagridMapper) 

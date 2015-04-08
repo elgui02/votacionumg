@@ -12,8 +12,8 @@ class OpcionPreguntumAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('tipoPreguntum')
-            ->add('opcion')
+            ->add('tipoPreguntum', 'sonata_type_model', array(), array('insert' => 'standard'))
+            ->add('opcion', 'sonata_type_model', array(), array('insert' => 'standard'))
         ;
     }
     protected function configureDatagridFilters(DatagridMapper $datagridMapper) 

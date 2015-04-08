@@ -14,7 +14,8 @@ class CampusCarreraAdmin extends Admin
         $formMapper
             ->add('carrera','sonata_type_model', array(), array('insert' => 'standard'))
             ->add('campus','sonata_type_model', array(), array('insert' => 'standard'))
-            ->add('jornada','sonata_type_model',array('expanded'=>true))                
+     #       ->add('jornada','sonata_type_model',array('expanded'=>true))  
+            ->add('jornada','sonata_type_model', array(), array('insert' => 'standard'))     
         ;
     }
     protected function configureDatagridFilters(DatagridMapper $datagridMapper) 

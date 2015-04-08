@@ -12,8 +12,8 @@ class PensumAnioAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('curso')
-            ->add('pensum')
+            ->add('curso','sonata_type_model', array(), array('insert' => 'standard'))
+            ->add('pensum','sonata_type_model', array(), array('insert' => 'standard'))
         ;
     }
     protected function configureDatagridFilters(DatagridMapper $datagridMapper) 

@@ -12,15 +12,8 @@ class CarreraCursoAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-      #      ->with('General', array('collapsed' => true))
-                ->add('campusCarrera')
-                ->add('pensumAnio')
-       #     ->end()
-/*            ->with('Options', array('collapsed' => true))
-                ->add('commentsCloseAt')
-                ->add('commentsEnabled', null, array('required' => false))
-                ->add('commentsDefaultStatus', 'choice', array('choices' => Comment::getStatusList()))
-            ->end()*/
+                ->add('campusCarrera', 'sonata_type_model', array(), array('insert' => 'standard'))
+                ->add('pensumAnio', 'sonata_type_model', array(), array('insert' => 'standard'))
         ;
     }
     protected function configureDatagridFilters(DatagridMapper $datagridMapper) 
