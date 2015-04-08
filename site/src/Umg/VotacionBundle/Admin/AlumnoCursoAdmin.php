@@ -12,8 +12,8 @@ class AlumnoCursoAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('alumno')
-            ->add('catedraticoCurso')
+            ->add('alumno', 'sonata_type_model', array(), array('insert' => 'standard'))
+            ->add('catedraticoCurso', 'sonata_type_model', array(), array('insert' => 'standard'))
         ;
     }
     protected function configureDatagridFilters(DatagridMapper $datagridMapper) 

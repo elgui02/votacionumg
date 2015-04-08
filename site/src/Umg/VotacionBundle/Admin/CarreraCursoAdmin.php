@@ -12,8 +12,8 @@ class CarreraCursoAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('campusCarrera')
-            ->add('pensumAnio')
+                ->add('campusCarrera', 'sonata_type_model', array(), array('insert' => 'standard'))
+                ->add('pensumAnio', 'sonata_type_model', array(), array('insert' => 'standard'))
         ;
     }
     protected function configureDatagridFilters(DatagridMapper $datagridMapper) 

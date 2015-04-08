@@ -217,6 +217,7 @@ class CarreraCurso
     }
     
     public function __toString() {
-        return $this->campusCarrera.', '.$this->pensumAnio;
+        #return $this->campusCarrera.', '.$this->pensumAnio;
+        return $this->pensumAnio.', '.$this->campusCarrera;
     }
 }

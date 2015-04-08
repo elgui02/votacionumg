@@ -317,6 +317,6 @@ class CampusCarrera
     }
     
     public function __toString() {
-        return $this->carrera.', '.$this->campus.', '.$this->jornada;
+        return $this->campus.', '.$this->carrera.', '.$this->jornada;
     }
 }
