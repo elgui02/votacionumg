@@ -129,4 +129,8 @@ class Opcion
     {
         return array('id', 'Opcion');
     }
+    
+    public function __toString() {
+        return $this->Opcion;
+    }
 }

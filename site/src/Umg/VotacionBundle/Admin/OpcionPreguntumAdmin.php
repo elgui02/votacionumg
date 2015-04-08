@@ -12,22 +12,23 @@ class OpcionPreguntumAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('TipoPregunta_id')
-            ->add('Opcion_id')
+            ->add('tipoPreguntum')
+            ->add('opcion')
         ;
     }
     protected function configureDatagridFilters(DatagridMapper $datagridMapper) 
     {
         $datagridMapper
-            ->add('TipoPregunta_id')
-            ->add('Opcion_id')
+            ->add('tipoPreguntum')
+            ->add('opcion')
         ;
     }
     protected function ConfigureListFields(ListMapper $listMapper) 
     {
         $listMapper
-            ->addIdentifier('TipoPregunta_id')
-            ->add('Opcion_id')
+            ->addIdentifier('id')
+            ->add('tipoPreguntum')
+            ->add('opcion')
         ;
     }
 }

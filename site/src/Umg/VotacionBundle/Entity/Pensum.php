@@ -129,4 +129,9 @@ class Pensum
     {
         return array('id', 'Anio');
     }
+    
+    public function __toString() {
+        $valor=(string)$this->Anio;
+        return $valor;
+    }
 }

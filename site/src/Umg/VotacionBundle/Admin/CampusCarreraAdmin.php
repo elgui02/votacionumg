@@ -12,25 +12,26 @@ class CampusCarreraAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('Carrera_id')
-            ->add('Campus_id')
-            ->add('Jornada_id')                
+            ->add('carrera')
+            ->add('campus')
+            ->add('jornada')                
         ;
     }
     protected function configureDatagridFilters(DatagridMapper $datagridMapper) 
     {
         $datagridMapper
-            ->add('Carrera_id')
-            ->add('Campus_id')
-            ->add('Jornada_id') 
+            ->add('carrera')
+            ->add('campus')
+            ->add('jornada') 
         ;
     }
     protected function ConfigureListFields(ListMapper $listMapper) 
     {
         $listMapper
-            ->addIdentifier('Carrera_id')
-            ->add('Campus_id')
-            ->add('Jornada_id') 
+            ->addIdentifier('id')
+            ->add('carrera')
+            ->add('campus')
+            ->add('jornada') 
         ;
     }
 }

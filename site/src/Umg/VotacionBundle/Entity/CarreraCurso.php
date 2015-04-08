@@ -215,4 +215,8 @@ class CarreraCurso
     {
         return array('id', 'CampusCarrera_id', 'PensumAnio_id');
     }
+    
+    public function __toString() {
+        return $this->campusCarrera.', '.$this->pensumAnio;
+    }
 }

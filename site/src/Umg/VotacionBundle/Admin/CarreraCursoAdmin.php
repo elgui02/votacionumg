@@ -12,22 +12,23 @@ class CarreraCursoAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('CampusCarrera_id')
-            ->add('PensumAnio_id')
+            ->add('campusCarrera')
+            ->add('pensumAnio')
         ;
     }
     protected function configureDatagridFilters(DatagridMapper $datagridMapper) 
     {
         $datagridMapper
-            ->add('CampusCarrera_id')
-            ->add('PensumAnio_id')
+            ->add('campusCarrera')
+            ->add('pensumAnio')
         ;
     }
     protected function ConfigureListFields(ListMapper $listMapper) 
     {
         $listMapper
-            ->addIdentifier('CampusCarrera_id')
-            ->add('PensumAnio_id')
+            ->addIdentifier('id')
+            ->add('campusCarrera')
+            ->add('pensumAnio')
         ;
     }
 }

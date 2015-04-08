@@ -172,4 +172,8 @@ class TipoPreguntum
     {
         return array('id', 'Tipo');
     }
+    
+    public function __toString() {
+        return $this->Tipo;
+    }
 }

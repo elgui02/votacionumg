@@ -215,4 +215,10 @@ class CatedraticoCurso
     {
         return array('id', 'Catedratico_id', 'CampusCurso_id');
     }
+    
+    public function __toString() {
+        
+        return $this->catedratico.', '.$this->carreraCurso;
+        
+    }
 }

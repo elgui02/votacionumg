@@ -215,4 +215,9 @@ class PensumAnio
     {
         return array('id', 'Curso_id', 'Pensum_id');
     }
+    
+    public function __toString()
+    {
+        return $this->pensum.', '.$this->curso;
+    }
 }

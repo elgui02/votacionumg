@@ -242,4 +242,9 @@ class Evaluacion
     {
         return array('id', 'Activa', 'FechaHora', 'FechaHoraFinal', 'CampusCarrera_id');
     }
+    
+    public function __toString() {
+        
+        return $this->FechaHora->format('Y-m-d');
+    }
 }

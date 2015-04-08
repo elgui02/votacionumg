@@ -12,22 +12,23 @@ class CatedraticoCursoAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('Catedratico_id')
-            ->add('CampusCurso_id')
+            ->add('catedratico')
+            ->add('carreraCurso')
         ;
     }
     protected function configureDatagridFilters(DatagridMapper $datagridMapper) 
     {
         $datagridMapper
-            ->add('Catedratico_id')
-            ->add('CampusCurso_id')
+            ->add('catedratico')
+            ->add('carreraCurso')
         ;
     }
     protected function ConfigureListFields(ListMapper $listMapper) 
     {
         $listMapper
-            ->addIdentifier('Catedratico_id')
-            ->add('CampusCurso_id')
+            ->addIdentifier('id')
+            ->add('catedratico')
+            ->add('carreraCurso')
         ;
     }
 }
