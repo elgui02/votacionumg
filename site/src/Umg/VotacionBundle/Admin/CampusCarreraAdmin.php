@@ -5,16 +5,16 @@ namespace Umg\VotacionBundle\Admin;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper; 
 
 class CampusCarreraAdmin extends Admin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('carrera')
-            ->add('campus')
-            ->add('jornada')                
+            ->add('carrera','sonata_type_model', array(), array('insert' => 'standard'))
+            ->add('campus','sonata_type_model', array(), array('insert' => 'standard'))
+            ->add('jornada','sonata_type_model',array('expanded'=>true))                
         ;
     }
     protected function configureDatagridFilters(DatagridMapper $datagridMapper) 
