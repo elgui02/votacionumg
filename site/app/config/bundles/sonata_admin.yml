@@ -2,7 +2,7 @@ sonata_admin:
     security:
         handler: sonata.admin.security.handler.role
     title:       Administración UMG
-#    title_logo:  /applicationcore/images/umg.png
+    title_logo:  /bundles/umgvotacion/images/umg.png
     templates:
         # default global templates
         layout:  SonataAdminBundle::standard_layout.html.twig
