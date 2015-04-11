@@ -2,15 +2,73 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Evaluación docente UMG</title>
+        <link rel='stylesheet' id='wp-color-picker-css'  href={{ asset('bundles/umgvotacion/css/color-picker.min.css') }} type='text/css' media='all' />
+        <link rel='stylesheet' id='theme-bootstrap-css'  href={{ asset('bundles/umgvotacion/css/bootstrap.min.css') }} type='text/css' media='all' />
+        <link rel='stylesheet' id='theme-style-css'  href={{ asset('bundles/umgvotacion/css/style.css') }} type='text/css' media='all' />
+        <script type='text/javascript' src={{ asset('bundles/umgvotacion/js/jquery.js') }}></script>
+        <script type='text/javascript' src={{ asset('bundles/umgvotacion/js/jquery-migrate.min.js') }}></script>
+        <script type='text/javascript' src={{ asset('bundles/umgvotacion/js/html5shiv.js') }}></script>
+        <script type='text/javascript' src={{ asset('bundles/umgvotacion/js/respond.min.js') }}></script>
+        <script type='text/javascript' src={{ asset('bundles/umgvotacion/js/ie10-viewport-bug-workaround.js') }}></script>
+        <style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
-    <body>
-        {% block body %}{% endblock %}
+    <body class="home page page-id-5 page-template page-template-templates page-template-page-full-width-flush page-template-templatespage-full-width-flush-php">
+        <!-- Navigation Top  ================================================== -->
+        <div class="navbar-wrapper">
+            <header class="navbar navbar-default navbar-fixed-top" id="top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="" title="Bootstrap Starter Theme" rel="home" class="navbar-brand">
+                    <img src={{ asset('bundles/umgvotacion/img/umg.png') }} class="img-circle"> Universidad Mariano Gálvez</a>
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+            <nav class="collapse navbar-collapse" id="navbar-main">
+            <ul id="menu-main-menu-right" class="nav navbar-nav navbar-right">
+                <li id="menu-item-34" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-34 dropdown show-on-hover">
+                <a href="#" title="Templates" class="dropdown-toggle" aria-haspopup="true">Templates <span class="caret"></span></a>
+            <ul role="menu" class=" dropdown-menu">
+                <li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36">
+                <a href="" title="Cover Template">Cover Template</a>
+                </li>
+                <li id="menu-item-75" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-75">
+                <a href="" title="Contact Us">Contact Us</a>
+                </li>
+                </ul>
+                </li>
+                </ul>
+              </div>
+            </header>        
+        </div>
+        <!-- Header content	================================================== -->
+    	<section id="header" class="masthead masthead-primary-bg">  
+    		<div class="container-fluid">
+				<h1 class="page-title">Full Width</h1>
+			    <p class="lead"></p>
+			</div><!-- /.container-fluid -->
+		</section><!-- /.masthead -->
+        <!-- Main content ================================================== -->
+        <div id="middle" class="container-fluid">
+        	<div class="row-fluid">
+                <article id="post-121" class="post-121 page type-page status-publish hentry">
+                	<div class="entry-content">
+                        {% block body %}{% endblock %}
+                    </div>
+                </article>
+            </div>
+        </div>
         {% block javascripts %}{% endblock %}
         {% javascripts '@data_tables' %}
-        < script type="text/javascript" src="{{ asset_url }}">< /script>
+        <script type="text/javascript" src="{{ asset_url }}">< /script>
         {% endjavascripts %}
     </body>
 </html>
