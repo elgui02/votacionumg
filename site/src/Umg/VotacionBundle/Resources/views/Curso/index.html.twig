@@ -1,12 +1,13 @@
 {% extends '::base.html.twig' %}
 
-{% block body -%}
-    <h1>Curso list</h1>
+{% block titulo %}
+    <h1 class="page-title">Lista de cursos</h1>
+{% endblock %}
 
-    <table class="records_list">
+{% block body -%}
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Curso</th>
                 <th>Actions</th>
             </tr>
@@ -14,15 +15,11 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('curso_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.Curso }}</td>
+                <td><a href="{{ path('curso_show', { 'id': entity.id }) }}">{{ entity.Curso }}</a></td>
                 <td>
                 <ul>
                     <li>
-                        <a href="{{ path('curso_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('curso_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('curso_edit', { 'id': entity.id }) }}">editar</a>
                     </li>
                 </ul>
                 </td>
@@ -34,7 +31,7 @@
         <ul>
         <li>
             <a href="{{ path('curso_new') }}">
-                Create a new entry
+                Nuevo curso
             </a>
         </li>
     </ul>

@@ -1,21 +1,17 @@
 {% extends '::base.html.twig' %}
 
-{% block body -%}
-    <h1>PensumAnio</h1>
+{% block titulo %}
+    <h1 class="page-title">{{ entity.Curso }}</h1>
+    <p class="lead">Código: {{entity.Codigo}} Carrera: {{entity.Carrera}}</p>
+{% endblock %}
 
-    <table class="record_properties">
+{% block body -%}
+
+    <table class="table table-striped">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Curso_id</th>
-                <td>{{ entity.Cursoid }}</td>
-            </tr>
-            <tr>
-                <th>Pensum_id</th>
-                <td>{{ entity.Pensumid }}</td>
+                <th>Pensum</th>
+                <td>{{ entity.Pensum }}</td>
             </tr>
         </tbody>
     </table>

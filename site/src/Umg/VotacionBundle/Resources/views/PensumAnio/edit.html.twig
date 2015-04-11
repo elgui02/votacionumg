@@ -1,16 +1,18 @@
 {% extends '::base.html.twig' %}
 
+{% block titulo %}
+    <h1 class="page-title">Editar asignación de curso a pensum</h1>
+{% endblock %}
+
 {% block body -%}
-    <h1>PensumAnio edit</h1>
 
     {{ form(edit_form) }}
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('pensumanio') }}">
-            Back to the list
+        <a href="{{ path('pensum_show', {'id':entity.Pensum.id}) }}">
+            Regresar al pensum
         </a>
     </li>
-    <li>{{ form(delete_form) }}</li>
 </ul>
 {% endblock %}

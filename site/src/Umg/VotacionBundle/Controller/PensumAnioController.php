@@ -76,7 +76,10 @@ class PensumAnioController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array(
+            'label' => 'Guardar',
+            'attr'  => array('class' => 'btn btn-primary'),
+        ));
 
         return $form;
     }
@@ -84,13 +87,21 @@ class PensumAnioController extends Controller
     /**
      * Displays a form to create a new PensumAnio entity.
      *
-     * @Route("/new", name="pensumanio_new")
+     * @Route("/{id}/new", name="pensumanio_new")
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
+    public function newAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
+        $pensum = $em->getRepository('UmgVotacionBundle:Pensum')->find($id);
+
+        if (!$pensum) {
+            throw $this->createNotFoundException('Unable to find PensumAnio entity.');
+        }
+
         $entity = new PensumAnio();
+        $entity->setPensum($pensum);
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -165,7 +176,10 @@ class PensumAnioController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array(
+            'label' => 'Actualizar',
+            'attr'  => array('class' => 'btn btn-primary'),
+        ));
 
         return $form;
     }

@@ -1,28 +1,28 @@
 {% extends '::base.html.twig' %}
 
-{% block body -%}
-    <h1>Pensum list</h1>
+{% block titulo %}
+    <h1 class="page-title">Lista de pensum's</h1>
+{% endblock %}
 
-    <table class="records_list">
+{% block body -%}
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Anio</th>
-                <th>Actions</th>
+                <th>Año</th>
+                <th>Actiones</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('pensum_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.Anio }}</td>
+                <td><a href="{{ path('pensum_show', { 'id': entity.id }) }}">{{ entity.Anio }}</a></td>
                 <td>
                 <ul>
                     <li>
-                        <a href="{{ path('pensum_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('pensum_show', { 'id': entity.id }) }}">ver</a>
                     </li>
                     <li>
-                        <a href="{{ path('pensum_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('pensum_edit', { 'id': entity.id }) }}">editar</a>
                     </li>
                 </ul>
                 </td>
@@ -34,7 +34,7 @@
         <ul>
         <li>
             <a href="{{ path('pensum_new') }}">
-                Create a new entry
+                Nuevo pensum
             </a>
         </li>
     </ul>

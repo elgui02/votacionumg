@@ -1,32 +1,50 @@
 {% extends '::base.html.twig' %}
 
-{% block body -%}
-    <h1>Pensum</h1>
+{% block titulo %}
+    <h1 class="page-title">Pensum: {{entity.Anio}}</h1>
+{% endblock %}
 
-    <table class="record_properties">
+{% block body -%}
+    <h1>Lista de cursos del pensum</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Curso</th>
+                <th>Carrera</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
         <tbody>
+        {% for curso in entity.PensumAnios %}
             <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
+                <td>{{ curso.Codigo }}</td>
+                <td>{{ curso.Curso }}</td>
+                <td>{{ curso.Carrera }}</td>
+                <td>
+                    <ul>
+                        <li><a href="{{ path('pensumanio_show', { 'id': curso.id }) }}">ver</a></li>
+                        <li><a href="{{ path('pensumanio_edit', { 'id': curso.id }) }}">editar</a></li>
+                    </ul>
+                </td>
             </tr>
-            <tr>
-                <th>Anio</th>
-                <td>{{ entity.Anio }}</td>
-            </tr>
+        {% endfor %}
         </tbody>
     </table>
+    <a href={{path('pensumanio_new', {'id':entity.id})}} class='btn btn-primary'>Asignar nuevo curso</a>
+    <br />
 
         <ul class="record_actions">
     <li>
         <a href="{{ path('pensum') }}">
-            Back to the list
+            Regresar a la lista
         </a>
     </li>
     <li>
         <a href="{{ path('pensum_edit', { 'id': entity.id }) }}">
-            Edit
+            Editar
         </a>
     </li>
-    <li>{{ form(delete_form) }}</li>
 </ul>
 {% endblock %}

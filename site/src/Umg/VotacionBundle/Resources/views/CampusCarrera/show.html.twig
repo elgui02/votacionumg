@@ -1,33 +1,47 @@
 {% extends '::base.html.twig' %}
 
-{% block body -%}
-    <h1>CampusCarrera</h1>
+{% block titulo %}
+    <h1 class="page-title">{{ entity.Carrera }}</h1>
+    <p class="lead">
+        {{ entity.Codigo}} - {{entity.Campus}} <br />
+        Jornada: {{entity.Jornada}}
+    </p>
+{% endblock %}
 
-    <table class="record_properties">
+{% block body -%}
+    <h1> Lista de cursos </h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Curso</th>
+                <th>Pensum</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
         <tbody>
+        {% for cursos in entity.getCarreraCursos %}
             <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
+                <td>{{ cursos.PensumAnio.Codigo }}</td>
+                <td>{{ carrera.PensumAnio.Curso }}</td>
+                <td>{{ carrera.PensumAnio.Pensum }}</td>
+                <td>
+                    <ul>
+                        <li><a href="{{ path('campuscarrera_show', { 'id': carrera.id }) }}">ver</a></li>
+                        <li><a href="{{ path('campuscarrera_edit', { 'id': carrera.id }) }}">editar</a></li>
+                    </ul>
+                </td>
             </tr>
-            <tr>
-                <th>Carrera_id</th>
-                <td>{{ entity.Carreraid }}</td>
-            </tr>
-            <tr>
-                <th>Campus_id</th>
-                <td>{{ entity.Campusid }}</td>
-            </tr>
-            <tr>
-                <th>Jornada_id</th>
-                <td>{{ entity.Jornadaid }}</td>
-            </tr>
+        {% endfor %}
         </tbody>
     </table>
+    <a href={{ path('campuscarrera_new', {'id': entity.id}) }} class="btn btn-primary">Asiganar carrera al campus</a>
+    <br />
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('campuscarrera') }}">
-            Back to the list
+        <a href="{{ path('campus_show', {'id':entity.Campus.id}) }}">
+            Regresar al campus
         </a>
     </li>
     <li>
