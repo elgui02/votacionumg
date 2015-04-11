@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Umg\VotacionBundle\UmgVotacionBundle(),
+            new Brown298\DataTablesBundle\Brown298DataTablesBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
