@@ -300,4 +300,10 @@ class PensumAnio
     {
         return array('id', 'Codigo', 'Curso_id', 'Pensum_id', 'Carrera_id');
     }
+
+    public function __toString()
+    {
+        return $this->Codigo;
+    }
+
 }

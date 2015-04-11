@@ -343,4 +343,9 @@ class CampusCarrera
     {
         return array('id', 'Codigo', 'Carrera_id', 'Campus_id', 'Jornada_id');
     }
+
+    public function __toString()
+    {
+        return $this->Codigo;
+    }
 }
