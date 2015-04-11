@@ -15,12 +15,10 @@ class CampusCarreraType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Carrera_id')
-            ->add('Campus_id')
-            ->add('Jornada_id')
+            ->add('Codigo')
             ->add('carrera')
-            ->add('campus')
             ->add('jornada')
+            ->add('campus')
         ;
     }
     

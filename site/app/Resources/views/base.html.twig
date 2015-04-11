@@ -35,10 +35,16 @@
             <nav class="collapse navbar-collapse" id="navbar-main">
             <ul id="menu-main-menu-right" class="nav navbar-nav navbar-right">
                 <li id="menu-item-34" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-34 dropdown show-on-hover">
-                <a href="#" title="Templates" class="dropdown-toggle" aria-haspopup="true">Templates <span class="caret"></span></a>
+                <a href="" title="Templates" class="dropdown-toggle" aria-haspopup="true">Administración <span class="caret"></span></a>
             <ul role="menu" class=" dropdown-menu">
                 <li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36">
-                <a href="" title="Cover Template">Cover Template</a>
+                <a href={{path('jornada')}} title="jornada">Jornadas</a>
+                </li>
+                <li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36">
+                <a href={{path('carrera')}} title="carrera">Carreras</a>
+                </l>
+                <li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36">
+                <a href={{path('campus')}} title="Campus">Campus</a>
                 </li>
                 <li id="menu-item-75" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-75">
                 <a href="" title="Contact Us">Contact Us</a>
@@ -52,8 +58,7 @@
         <!-- Header content	================================================== -->
     	<section id="header" class="masthead masthead-primary-bg">  
     		<div class="container-fluid">
-                <h1 class="page-title">{%block titulo%}{%endblock%}</h1>
-			    <p class="lead"></p>
+                {%block titulo%}{%endblock%}
 			</div><!-- /.container-fluid -->
 		</section><!-- /.masthead -->
         <!-- Main content ================================================== -->

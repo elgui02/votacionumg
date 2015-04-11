@@ -76,7 +76,10 @@ class CampusCarreraController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array(
+            'label' => 'Guardar',
+            'attr'  => array('class'=>'btn btn-primary'),
+        ));
 
         return $form;
     }
@@ -84,13 +87,20 @@ class CampusCarreraController extends Controller
     /**
      * Displays a form to create a new CampusCarrera entity.
      *
-     * @Route("/new", name="campuscarrera_new")
+     * @Route("/{id}/new", name="campuscarrera_new")
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
+    public function newAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
+        $campus = $em->getRepository('UmgVotacionBundle:Campus')->find($id);
+        if (!$campus) {
+            throw $this->createNotFoundException('Unable to find CampusCarrera entity.');
+        }
+
         $entity = new CampusCarrera();
+        $entity->setCampus($campus);
         $form   = $this->createCreateForm($entity);
 
         return array(
