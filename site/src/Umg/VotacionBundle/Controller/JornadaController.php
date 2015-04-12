@@ -32,7 +32,7 @@ class JornadaController extends Controller
         $entities = $em->getRepository('UmgVotacionBundle:Jornada')->findAll();
 
         return array(
-            'entities' => $entities,
+            'entities' => $entities, 
         );
     }
     /**
@@ -193,7 +193,7 @@ class JornadaController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('jornada_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('jornada', array('id' => $id)));
         }
 
         return array(
