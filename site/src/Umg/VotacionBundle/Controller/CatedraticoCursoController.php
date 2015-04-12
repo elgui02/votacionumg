@@ -53,7 +53,7 @@ class CatedraticoCursoController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('catedraticocurso_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('carreracurso_show', array('id' => $entity->getCampusCursoId())));
         }
 
         return array(
@@ -207,7 +207,7 @@ class CatedraticoCursoController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('catedraticocurso_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('carreracurso_show', array('id' => $entity->getCampusCursoId())));
         }
 
         return array(

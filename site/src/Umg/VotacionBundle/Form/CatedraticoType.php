@@ -15,7 +15,17 @@ class CatedraticoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('Codigo')
             ->add('Nombre')
+            ->add('Direccion')
+            ->add('Nit')
+            ->add('FechaNacimiento')
+            ->add('Colegiado')
+            ->add('Especialidad')
+            ->add('Universidad')
+            ->add('Graduacion')
+            ->add('Estudios')
+            ->add('Logros')
         ;
     }
     

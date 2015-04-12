@@ -7,10 +7,8 @@
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('catedraticocurso') }}">
-            Back to the list
+        <a href="{{ path('carreracurso_show',{'id':entity.CarreraCurso.id}) }}">
+            Regresar al curso
         </a>
     </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
 {% endblock %}
