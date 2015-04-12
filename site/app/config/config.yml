@@ -48,6 +48,7 @@ assetic:
             inputs:
                 - %kernel.root_dir%/../vendor/datatables/datatables/media/js/jquery.js
                 - %kernel.root_dir%/../vendor/datatables/datatables/media/js/jquery.dataTables.js
+
 # Doctrine Configuration
 doctrine:
     dbal:

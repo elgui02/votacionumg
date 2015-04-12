@@ -19,6 +19,12 @@ class CampusCarreraType extends AbstractType
             ->add('carrera')
             ->add('jornada')
             ->add('campus')
+            ->add('catedratico','genemu_jqueryselect2_entity',array(
+                'class' => 'Umg\VotacionBundle\Entity\Catedratico',
+                'empty_value' => 'Seleccione coordinador',
+                'required' => true,
+                'configs' => array('width' => '1139px'),
+            ))
         ;
     }
     

@@ -25,14 +25,18 @@ class CarreraController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+        $dataTable = $this->get('data_tables.manager')->getTable('carreraTable');
+        if ($response = $dataTable->ProcessRequest($request)) {
+            return $response;
+        }
+
         $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('UmgVotacionBundle:Carrera')->findAll();
-
+        
+        
         return array(
-            'entities' => $entities,
+            'dataTable' => $dataTable,
         );
     }
     /**

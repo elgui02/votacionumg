@@ -175,7 +175,10 @@ class CampusCarreraController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array(
+            'label' => 'Actualizar',
+            'attr'  => array('class' => 'btn btn-primary'),
+        ));
 
         return $form;
     }
@@ -203,7 +206,7 @@ class CampusCarreraController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('campuscarrera_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('campuscarrera_show', array('id' => $id)));
         }
 
         return array(
