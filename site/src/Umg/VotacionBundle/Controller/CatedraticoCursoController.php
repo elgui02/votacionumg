@@ -76,7 +76,10 @@ class CatedraticoCursoController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array(
+            'label' => 'Guardar',
+            'attr'  => array('class' => 'btn btn-primary'),
+        ));
 
         return $form;
     }
@@ -84,13 +87,21 @@ class CatedraticoCursoController extends Controller
     /**
      * Displays a form to create a new CatedraticoCurso entity.
      *
-     * @Route("/new", name="catedraticocurso_new")
+     * @Route("/{id}/new", name="catedraticocurso_new")
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
+    public function newAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
+        $carrera = $em->getRepository('UmgVotacionBundle:CarreraCurso')->find($id);
+
+        if (!$carrera) {
+            throw $this->createNotFoundException('Unable to find CatedraticoCurso entity.');
+        }
+
         $entity = new CatedraticoCurso();
+        $entity->setCarreraCurso($carrera);
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -165,7 +176,10 @@ class CatedraticoCursoController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array(
+            'label' => 'Actualizar',
+            'attr'  => array('class' => 'btn btn-primary'),
+        ));
 
         return $form;
     }

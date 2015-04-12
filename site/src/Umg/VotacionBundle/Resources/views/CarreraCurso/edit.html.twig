@@ -1,16 +1,18 @@
 {% extends '::base.html.twig' %}
 
-{% block body -%}
-    <h1>CarreraCurso edit</h1>
+{% block titulo %}
+    <h1 class="page-title">Editar asignación de cursos a la carrera</h1>
+{% endblock %}
 
+{% block body -%}
+    {{ form_javascript(edit_form) }}    
     {{ form(edit_form) }}
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('carreracurso') }}">
-            Back to the list
+    <a href="{{ path('campuscarrera_show',{'id':entity.CampusCarrera.id}) }}">
+            Regresar a la carrera
         </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
+            </li>
 </ul>
 {% endblock %}

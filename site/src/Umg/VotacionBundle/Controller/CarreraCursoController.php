@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Doctrine\DBAL\Connection;
 use Umg\VotacionBundle\Entity\CarreraCurso;
 use Umg\VotacionBundle\Form\CarreraCursoType;
+use Umg\VotacionBundle\Form\CarreraCursoEditType;
 
 /**
  * CarreraCurso controller.
@@ -100,7 +101,10 @@ class CarreraCursoController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array(
+            'label' => 'Guardar',
+            'attr'  => array('class' => 'btn btn-primary'),
+        ));
 
         return $form;
     }
@@ -217,12 +221,15 @@ class CarreraCursoController extends Controller
     */
     private function createEditForm(CarreraCurso $entity)
     {
-        $form = $this->createForm(new CarreraCursoType(), $entity, array(
+        $form = $this->createForm(new CarreraCursoEditType(), $entity, array(
             'action' => $this->generateUrl('carreracurso_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array(
+            'label' => 'Actualizar',
+            'attr'  => array('class' => 'btn btn-primary'),
+        ));
 
         return $form;
     }

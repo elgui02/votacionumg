@@ -1,36 +1,40 @@
 {% extends '::base.html.twig' %}
 
-{% block body -%}
-    <h1>CarreraCurso</h1>
+{% block titulo %}
+    <h1 class="page-title">{{entity.PensumAnio.Codigo}} {{entity.PensumAnio.Curso}}</h1>
+    <p class="lead">{{ entity.CampusCarrera }}</p>
+{% endblock %}
 
-    <table class="record_properties">
-        <tbody>
+{% block body -%}
+
+    <table class="table table-striped">
+        <thead>
             <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
+                <th>Catedrático asignado</th>
+                <td>
+                    {% set nuevo = 1 %}
+                    {% for catedratico in entity.CatedraticoCursos %} 
+                        {% set nuevo = 0 %}
+                        <a href={{path('catedraticocurso_edit', {'id': catedratico.id})}}>{{ catedratico.Catedratico }}</a>
+                    {% endfor %}
+                    {% if nuevo == 1 %}
+                        <a href={{path('catedraticocurso_new', {'id':entity.id})}}>Asignar catedrático</a>
+                    {% endif %}
+                </td>
             </tr>
-            <tr>
-                <th>Campuscarrera_id</th>
-                <td>{{ entity.CampusCarreraid }}</td>
-            </tr>
-            <tr>
-                <th>Pensumanio_id</th>
-                <td>{{ entity.PensumAnioid }}</td>
-            </tr>
-        </tbody>
+        </thead>
     </table>
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('carreracurso') }}">
-            Back to the list
+        <a href="{{ path('campuscarrera_show', {'id':entity.CampusCarreraid}) }}">
+            Regresar a la carrera
         </a>
     </li>
     <li>
         <a href="{{ path('carreracurso_edit', { 'id': entity.id }) }}">
-            Edit
+            Editar
         </a>
     </li>
-    <li>{{ form(delete_form) }}</li>
 </ul>
 {% endblock %}
