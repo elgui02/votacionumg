@@ -303,7 +303,7 @@ class PensumAnio
 
     public function __toString()
     {
-        return $this->Codigo;
+        return $this->Codigo.' - '.$this->curso;
     }
 
 }

@@ -23,12 +23,12 @@
         {% for cursos in entity.getCarreraCursos %}
             <tr>
                 <td>{{ cursos.PensumAnio.Codigo }}</td>
-                <td>{{ carrera.PensumAnio.Curso }}</td>
-                <td>{{ carrera.PensumAnio.Pensum }}</td>
+                <td>{{ cursos.PensumAnio.Curso }}</td>
+                <td>{{ cursos.PensumAnio.Pensum }}</td>
                 <td>
                     <ul>
-                        <li><a href="{{ path('campuscarrera_show', { 'id': carrera.id }) }}">ver</a></li>
-                        <li><a href="{{ path('campuscarrera_edit', { 'id': carrera.id }) }}">editar</a></li>
+                        <li><a href="{{ path('carreracurso_show', { 'id': cursos.id }) }}">ver</a></li>
+                        <li><a href="{{path('carreracurso_edit', { 'id': cursos.id }) }}">editar</a></li>
                     </ul>
                 </td>
             </tr>

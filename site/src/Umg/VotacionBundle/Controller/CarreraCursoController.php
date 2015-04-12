@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Doctrine\DBAL\Connection;
 use Umg\VotacionBundle\Entity\CarreraCurso;
 use Umg\VotacionBundle\Form\CarreraCursoType;
 
@@ -44,22 +45,45 @@ class CarreraCursoController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new CarreraCurso();
-        $form = $this->createCreateForm($entity);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $cursos = ($request->request->get('umg_votacionbundle_carreracurso'));
+        var_dump($cursos);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
+        $em->getConnection()->beginTransaction();
 
-            return $this->redirect($this->generateUrl('carreracurso_show', array('id' => $entity->getId())));
+        try {
+            
+            $carrera = $em->getRepository('UmgVotacionBundle:CampusCarrera')->find($cursos['campusCarrera']);
+            foreach ($cursos['pensumAnio'] as $valor)
+            {
+                $curso = $em->getRepository('UmgVotacionBundle:PensumAnio')->find($valor);
+                
+                $entity = new CarreraCurso();
+                $entity->setCampusCarrera($carrera);
+                $entity->setPensumAnio($curso);
+                $em->persist($entity);
+                $em->flush();
+
+            }
+
+            $em->getConnection()->commit();
+            return $this->redirect($this->generateUrl('campuscarrera_show', array('id' => $cursos['campusCarrera'])));
+
+        } 
+        catch (Exception $e) {
+            $em->getConnection()->rollback();
+            $entity = new CarreraCurso();
+            $entity->setCampusCarrera($carrera);
+            $form   = $this->createCreateForm($entity);
+        
+        
+            return array(
+                'entity' => $entity,
+                'form'   => $form->createView(),
+            );        
+
+            throw $e;
         }
-
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
     }
 
     /**
@@ -84,20 +108,53 @@ class CarreraCursoController extends Controller
     /**
      * Displays a form to create a new CarreraCurso entity.
      *
-     * @Route("/new", name="carreracurso_new")
+     * @Route("/{id}/new", name="carreracurso_new")
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
+    public function newAction($id)
     {
-        $entity = new CarreraCurso();
-        $form   = $this->createCreateForm($entity);
+        $em = $this->getDoctrine()->getManager();
+        $carrera = $em->getRepository('UmgVotacionBundle:CampusCarrera')->find($id);
 
+        if (!$carrera) {
+            throw $this->createNotFoundException('Unable to find CampusCarrera entity.');
+        }
+        $entity = new CarreraCurso();
+        $entity->setCampusCarrera($carrera);
+        $form   = $this->createCreateForm($entity);
+        
+        
         return array(
             'entity' => $entity,
             'form'   => $form->createView(),
         );
     }
+
+
+    /**
+     * Displays a form to create a new CarreraCurso entity.
+     *
+     * @Route("/{id}/nuevo", name="carreracurso_nuevo")
+     * @Method("GET")
+     * @Template()
+     */
+    public function nuevoAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $carrera = $em->getRepository('UmgVotacionBundle:Carrera')->find($id);
+        $cursos = $em->getRepository('UmgVotacionBundle:PensumAnio')->findByCarrera($carrera);
+
+        if (!$carrera) {
+            throw $this->createNotFoundException('Unable to find CarreraCurso entity.');
+        }
+        
+
+        return array(
+            'cursos' => $cursos,
+        );
+    }
+
 
     /**
      * Finds and displays a CarreraCurso entity.

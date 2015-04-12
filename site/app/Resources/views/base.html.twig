@@ -8,12 +8,15 @@
         <link rel='stylesheet' id='wp-color-picker-css'  href={{ asset('bundles/umgvotacion/css/color-picker.min.css') }} type='text/css' media='all' />
         <link rel='stylesheet' id='theme-bootstrap-css'  href={{ asset('bundles/umgvotacion/css/bootstrap.min.css') }} type='text/css' media='all' />
         <link rel='stylesheet' id='theme-style-css'  href={{ asset('bundles/umgvotacion/css/style.css') }} type='text/css' media='all' />
-        <script type='text/javascript' src={{ asset('bundles/umgvotacion/js/jquery.js') }}></script>
+        <link href={{ asset('bundles/umgvotacion/css/select2.css') }} rel="stylesheet">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <script type='text/javascript' src={{ asset('bundles/umgvotacion/js/jquery-migrate.min.js') }}></script>
         <script type='text/javascript' src={{ asset('bundles/umgvotacion/js/html5shiv.js') }}></script>
         <script type='text/javascript' src={{ asset('bundles/umgvotacion/js/respond.min.js') }}></script>
         <script type='text/javascript' src={{ asset('bundles/umgvotacion/js/ie10-viewport-bug-workaround.js') }}></script>
-        <style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+        <script src={{ asset('bundles/umgvotacion/js/select2.min.js') }}></script>
+
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
@@ -79,8 +82,5 @@
             </div>
         </div>
         {% block javascripts %}{% endblock %}
-        {% javascripts '@data_tables' %}
-        <script type="text/javascript" src="{{ asset_url }}">< /script>
-        {% endjavascripts %}
-    </body>
+        </body>
 </html>
