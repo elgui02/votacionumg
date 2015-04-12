@@ -1,30 +1,28 @@
 {% extends '::base.html.twig' %}
 
-{% block titulo %}
-    <h1 class="page-title">Lista de Carreras</h1>
-{% endblock %}
-
 {% block body -%}
-    <table class="table table-striped">
+    <h1>Carrera list</h1>
+
+    <table class="records_list">
         <thead>
             <tr>
-             
+                <th>Id</th>
                 <th>Carrera</th>
-                <th>Acciones</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('carrera_show', { 'id': entity.id }) }}">{{ entity.Carrera }}</a></td>
-                
+                <td><a href="{{ path('carrera_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.Carrera }}</td>
                 <td>
                 <ul>
                     <li>
-                        <a href="{{ path('carrera_show', { 'id': entity.id }) }}">Ver</a>
+                        <a href="{{ path('carrera_show', { 'id': entity.id }) }}">show</a>
                     </li>
                     <li>
-                        <a href="{{ path('carrera_edit', { 'id': entity.id }) }}">Editar</a>
+                        <a href="{{ path('carrera_edit', { 'id': entity.id }) }}">edit</a>
                     </li>
                 </ul>
                 </td>
@@ -32,8 +30,12 @@
         {% endfor %}
         </tbody>
     </table>
-            <a href="{{ path('carrera_new') }}" class="btn btn-primary">
-                Crear Carrera
-            </a>
 
+        <ul>
+        <li>
+            <a href="{{ path('carrera_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
     {% endblock %}

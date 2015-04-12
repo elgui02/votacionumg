@@ -1,9 +1,9 @@
 {% extends '::base.html.twig' %}
-{% block titulo %}
-    <h1 class="page-title">Jornada</h1>
-{% endblock %}
+
 {% block body -%}
-    <table class="table table-striped">
+    <h1>Jornada</h1>
+
+    <table class="record_properties">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -15,20 +15,18 @@
             </tr>
         </tbody>
     </table>
-    <tr>
-        <td></td>
-    </tr>
+
         <ul class="record_actions">
-    
-        <a href="{{ path('jornada') }}" class="btn btn-primary">
-            Volver a la Lista
+    <li>
+        <a href="{{ path('jornada') }}">
+            Back to the list
         </a>
-    
-    
-        <a href="{{ path('jornada_edit', { 'id': entity.id }) }}" class="btn btn-primary">
-            Editar
+    </li>
+    <li>
+        <a href="{{ path('jornada_edit', { 'id': entity.id }) }}">
+            Edit
         </a>
-    
-    {{ form(delete_form) }}
+    </li>
+    <li>{{ form(delete_form) }}</li>
 </ul>
 {% endblock %}

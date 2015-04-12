@@ -1,11 +1,16 @@
 {% extends '::base.html.twig' %}
-{% block titulo %}
-    <h1 class="page-title">Editar Carrera</h1>
-{% endblock %}
+
 {% block body -%}
+    <h1>Carrera edit</h1>
+
     {{ form(edit_form) }}
-        <a href="{{ path('carrera') }}" class="btn btn-primary">
-            Volver a la lista
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('carrera') }}">
+            Back to the list
         </a>
-{{ form(delete_form) }}
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
 {% endblock %}
