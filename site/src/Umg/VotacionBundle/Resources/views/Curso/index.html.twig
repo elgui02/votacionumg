@@ -9,7 +9,7 @@
         <thead>
             <tr>
                 <th>Curso</th>
-                <th>Actions</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -27,12 +27,7 @@
         {% endfor %}
         </tbody>
     </table>
-
-        <ul>
-        <li>
-            <a href="{{ path('curso_new') }}">
+            <a href="{{ path('curso_new') }}" class="btn btn-primary">
                 Nuevo curso
             </a>
-        </li>
-    </ul>
     {% endblock %}

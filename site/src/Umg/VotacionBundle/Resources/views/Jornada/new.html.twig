@@ -1,15 +1,15 @@
 {% extends '::base.html.twig' %}
-
+{% block titulo %}
+    <h1 class="page-title">Creación de Jornadas</h1>
+{% endblock %}
 {% block body -%}
-    <h1>Jornada creation</h1>
+    
 
     {{ form(form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('jornada') }}">
-            Back to the list
+      
+ 
+        <a href="{{ path('jornada') }}" class="btn btn-primary">
+            Volver a la lista
         </a>
-    </li>
-</ul>
 {% endblock %}

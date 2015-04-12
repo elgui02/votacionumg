@@ -7,12 +7,7 @@
 {% block body -%}
 
     {{ form(form) }}
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('curso') }}">
+        <a href="{{ path('curso') }}" class="btn btn-primary">
             Regresar a la lista
         </a>
-    </li>
-</ul>
 {% endblock %}

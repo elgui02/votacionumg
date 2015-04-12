@@ -1,15 +1,17 @@
 {% extends '::base.html.twig' %}
-
+{% block titulo %}
+    <h1 class="page-title">Creación de Campus</h1>
+{% endblock %}
 {% block body -%}
-    <h1>Campus creation</h1>
+
 
     {{ form(form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('campus') }}">
-            Back to the list
+       
+
+        <a href="{{ path('campus') }}" class="btn btn-primary">
+            Volver al listado
         </a>
-    </li>
+   
 </ul>
 {% endblock %}
