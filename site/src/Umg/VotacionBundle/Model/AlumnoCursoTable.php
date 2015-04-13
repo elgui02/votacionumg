@@ -17,7 +17,7 @@ use Symfony\Component\Templating\EngineInterface;
  *
  * @DataTable\Table(id="carreraTable", displayLength=10)
  */
-class CarreraTable extends QueryBuilderDataTable implements QueryBuilderDataTableInterface
+class AlumnoCursoTable extends QueryBuilderDataTable implements QueryBuilderDataTableInterface
 {
     /**
      * @var string
