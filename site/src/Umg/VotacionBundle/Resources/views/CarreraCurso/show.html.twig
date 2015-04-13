@@ -25,6 +25,34 @@
         </thead>
     </table>
 
+    
+    <h1> Lista de alumnos asignados </h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Carné</th>
+                <th>Nombre</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for alumnos in entity.getAlumnoCursos %}
+            <tr>
+                <td>{{ alumnos.Alumno.Carne }}</td>
+                <td>{{ alumnos.Alumno.Nombre }}</td>
+                <td>
+                    <ul>
+                        <li><a href="{{ path('alumnocurso_show', { 'id': alumnos.id }) }}">ver</a></li>
+                        <li><a href="{{ path('alumnocurso_edit', { 'id': alumnos.id }) }}">editar</a></li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
+    <a href={{path('alumnocurso_new',{'id':entity.id})}} class='btn btn-primary'>Asignar alumnos</a>
+
         <ul class="record_actions">
     <li>
         <a href="{{ path('campuscarrera_show', {'id':entity.CampusCarreraid}) }}">

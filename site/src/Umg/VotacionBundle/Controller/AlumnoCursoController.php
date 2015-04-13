@@ -53,7 +53,7 @@ class AlumnoCursoController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('alumnocurso_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('carreracurso_show', array('id' => $entity->getCarreraCurso()->getId())));
         }
 
         return array(
@@ -76,7 +76,10 @@ class AlumnoCursoController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array(
+            'label' => 'Guardar',
+            'attr'  => array('class' => 'btn btn-primary'),
+        ));
 
         return $form;
     }
@@ -84,13 +87,21 @@ class AlumnoCursoController extends Controller
     /**
      * Displays a form to create a new AlumnoCurso entity.
      *
-     * @Route("/new", name="alumnocurso_new")
+     * @Route("/{id}/new", name="alumnocurso_new")
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
+    public function newAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
+        $carrera = $em->getRepository('UmgVotacionBundle:CarreraCurso')->find($id);
+
+        if (!$carrera) {
+            throw $this->createNotFoundException('Unable to find CarreraCurso entity.');
+        }
+
         $entity = new AlumnoCurso();
+        $entity->setCarreraCurso($carrera);
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -165,7 +176,10 @@ class AlumnoCursoController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array(
+            'label' => 'Actualizar',
+            'attr'  => array('class' => 'btn btn-primary'),
+        ));
 
         return $form;
     }
@@ -193,7 +207,7 @@ class AlumnoCursoController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('alumnocurso_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('carreracurso_show', array('id' => $entity->getCarreraCurso()->getId())));
         }
 
         return array(

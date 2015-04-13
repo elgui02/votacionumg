@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class AlumnoCursoType extends AbstractType
+class AlumnoCursoEditType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
