@@ -17,8 +17,24 @@ use Umg\VotacionBundle\Form\JornadaType;
  */
 class JornadaController extends Controller 
 {
+    /**
+     * Lists all Jornada entities.
+     *
+     * @Route("/", name="jornada")
+     * @Method("GET")
+     * @Template()
+     */
+    public function indexAction()
+    {
+        $em = $this->getDoctrine()->getManager();
 
-///-------------------
+        $entities = $em->getRepository('UmgVotacionBundle:Jornada')->findAll();
+
+        return array(
+            'entities' => $entities, 
+        );
+    }
+
     /**
      * Creates a new Jornada entity.
      *
