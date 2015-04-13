@@ -53,7 +53,7 @@ class AlumnoController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('alumno_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('alumno'));
         }
 
         return array(
@@ -76,7 +76,10 @@ class AlumnoController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array(
+            'label' => 'Guardar',
+            'attr'  => array('class' => 'btn btn-primary'),
+        ));
 
         return $form;
     }
@@ -165,7 +168,10 @@ class AlumnoController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array(
+            'label' => 'Actualizar',
+            'attr'  => array('class' => 'btn btn-primary'),
+        ));
 
         return $form;
     }
@@ -193,7 +199,7 @@ class AlumnoController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('alumno_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('alumno'));
         }
 
         return array(

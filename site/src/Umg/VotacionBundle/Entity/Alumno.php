@@ -159,6 +159,6 @@ class Alumno
     }
     
     public function __toString() {
-        return $this->Nombre;
+        return $this->Carne.' - '.$this->Nombre;
     }
 }
