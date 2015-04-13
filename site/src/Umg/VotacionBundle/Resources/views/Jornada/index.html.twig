@@ -1,28 +1,15 @@
 {% extends '::base.html.twig' %}
-
 {% block titulo %}
     <h1 class="page-title">Lista de Jornadas</h1>
 {% endblock %}
 {% block body -%}
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Jornada</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('jornada_show', { 'id': entity.id }) }}">{{ entity.Jornada }}</a></td>
-                <td>
-                        <a href="{{ path('jornada_edit', { 'id': entity.id }) }}" class="btn btn-info btn-xs">Editar</a>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-            <a href="{{ path('jornada_new') }}" class="btn btn-primary">
-                Nueva Jornada
-            </a>
-    {% endblock %}
+    <div class="table-bordered">
+            {{ addDataTable(columns, {
+            'path':          path('show_ajax'),
+            'bLengthChange': 1,
+            'bInfo':         1,
+            'bFilter':       1,
+        }) }}
+
+    </div>
+{% endblock %}
