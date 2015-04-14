@@ -1,14 +1,17 @@
 {% extends '::base.html.twig' %}
 
+{% block titulo %}
+    <h1 class="page-title">Nueva pregunta</h1>
+{% endblock %}
+
 {% block body -%}
-    <h1>Preguntum creation</h1>
 
     {{ form(form) }}
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('preguntum') }}">
-            Back to the list
+        <a href="{{ path('evaluacion_show', {'id':entity.Evaluacion.id}) }}">
+            Regresar a la evaluación
         </a>
     </li>
 </ul>

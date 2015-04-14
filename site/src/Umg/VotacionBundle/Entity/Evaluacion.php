@@ -245,6 +245,6 @@ class Evaluacion
     
     public function __toString() {
         
-        return $this->FechaHora->format('Y-m-d');
+        return $this->campusCarrera.' '.$this->FechaHora->format('Y-m-d');
     }
 }

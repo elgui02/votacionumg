@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Umg\VotacionBundle\Entity\Preguntum;
+use Umg\VotacionBundle\Entity\OpcionPreguntum;
+use Umg\VotacionBundle\Entity\Opcion;
 use Umg\VotacionBundle\Form\PreguntumType;
 
 /**
@@ -48,12 +50,13 @@ class PreguntumController extends Controller
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
+        $em = $this->getDoctrine()->getManager();
+
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('preguntum_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('evaluacion_show', array('id' => $entity->getEvaluacion()->getId())));
         }
 
         return array(
@@ -76,7 +79,10 @@ class PreguntumController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array(
+            'label' => 'Guardar',
+            'attr'  => array('class' => 'btn btn-primary'),
+        ));
 
         return $form;
     }
@@ -84,13 +90,21 @@ class PreguntumController extends Controller
     /**
      * Displays a form to create a new Preguntum entity.
      *
-     * @Route("/new", name="preguntum_new")
+     * @Route("/{id}/new", name="preguntum_new")
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
+    public function newAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
+        $evaluacion = $em->getRepository('UmgVotacionBundle:Evaluacion')->find($id);
+
+        if (!$evaluacion) {
+            throw $this->createNotFoundException('Unable to find Evaluacion entity.');
+        }
+
         $entity = new Preguntum();
+        $entity->setEvaluacion($evaluacion);
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -165,7 +179,10 @@ class PreguntumController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array(
+            'label' => 'Actualizar',
+            'attr'  => array('class' => 'btn btn-primary'),
+        ));
 
         return $form;
     }

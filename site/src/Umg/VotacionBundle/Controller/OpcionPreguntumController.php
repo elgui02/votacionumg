@@ -44,22 +44,44 @@ class OpcionPreguntumController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new OpcionPreguntum();
-        $form = $this->createCreateForm($entity);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $opciones = ($request->request->get('umg_votacionbundle_opcionpreguntum'));
+        $em->getConnection()->beginTransaction();
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
+        try {
+            
+            $pregunta = $em->getRepository('UmgVotacionBundle:Preguntum')->find($opciones['preguntum']);
+            foreach ($opciones['opcion'] as $valor)
+            {
+                $opcion = $em->getRepository('UmgVotacionBundle:Opcion')->find($valor);
+                
+                $entity = new OpcionPreguntum();
+                $entity->setPreguntum($pregunta);
+                $entity->setOpcion($opcion);
+                $em->persist($entity);
+                $em->flush();
 
-            return $this->redirect($this->generateUrl('opcionpreguntum_show', array('id' => $entity->getId())));
+            }
+
+            $em->getConnection()->commit();
+            return $this->redirect($this->generateUrl('evaluacion_show', array('id' => $pregunta->getEvaluacion()->getId())));
+
+        } 
+        catch (Exception $e) {
+            $em->getConnection()->rollback();
+            $entity = new OpcionPreguntum();
+            $entity->setPreguntum($pregunta);
+            $form   = $this->createCreateForm($entity);
+        
+        
+            return array(
+                'entity' => $entity,
+                'form'   => $form->createView(),
+            );        
+
+            throw $e;
         }
 
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
     }
 
     /**
@@ -76,7 +98,10 @@ class OpcionPreguntumController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array(
+            'label' => 'Guardar',
+            'attr'  => array('class' => 'btn btn-primary'),
+        ));
 
         return $form;
     }
@@ -84,13 +109,21 @@ class OpcionPreguntumController extends Controller
     /**
      * Displays a form to create a new OpcionPreguntum entity.
      *
-     * @Route("/new", name="opcionpreguntum_new")
+     * @Route("/{id}/new", name="opcionpreguntum_new")
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
+    public function newAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
+        $pregunta = $em->getRepository('UmgVotacionBundle:Preguntum')->find($id);
+
+        if (!$pregunta) {
+            throw $this->createNotFoundException('Unable to find OpcionPreguntum entity.');
+        }
+
         $entity = new OpcionPreguntum();
+        $entity->setPreguntum($pregunta);
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -165,7 +198,10 @@ class OpcionPreguntumController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array(
+            'label' => 'Actualizar',
+            'attr'  => array('class' => 'btn btn-primary'),
+        ));
 
         return $form;
     }
@@ -205,15 +241,11 @@ class OpcionPreguntumController extends Controller
     /**
      * Deletes a OpcionPreguntum entity.
      *
-     * @Route("/{id}", name="opcionpreguntum_delete")
-     * @Method("DELETE")
+     * @Route("/{id}/delete", name="opcionpreguntum_delete")
+     * @Method("GET")
      */
     public function deleteAction(Request $request, $id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('UmgVotacionBundle:OpcionPreguntum')->find($id);
 
@@ -223,9 +255,8 @@ class OpcionPreguntumController extends Controller
 
             $em->remove($entity);
             $em->flush();
-        }
 
-        return $this->redirect($this->generateUrl('opcionpreguntum'));
+            return $this->redirect($this->generateUrl('evaluacion_show', array('id' => $entity->getPreguntum()->getEvaluacion()->getId())));
     }
 
     /**

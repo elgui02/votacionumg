@@ -15,12 +15,10 @@ class PreguntumType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Pregunta')
-            ->add('TipoPregunta_id')
-            ->add('Evaluacion_id')
-            ->add('tipoPreguntum')
             ->add('evaluacion')
-        ;
+            ->add('Pregunta')
+            ->add('tipoPreguntum')
+            ;
     }
     
     /**

@@ -48,8 +48,6 @@ class CarreraCursoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $cursos = ($request->request->get('umg_votacionbundle_carreracurso'));
-        var_dump($cursos);
-
         $em->getConnection()->beginTransaction();
 
         try {

@@ -286,4 +286,9 @@ class Preguntum
     {
         return array('id', 'Pregunta', 'TipoPregunta_id', 'Evaluacion_id');
     }
+
+    public function __toString()
+    {
+        return $this->Pregunta;
+    }
 }
