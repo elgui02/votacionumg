@@ -25,14 +25,18 @@ class CursoController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+        $dataTable = $this->get('data_tables.manager')->getTable('cursoTable');
+        if ($response = $dataTable->ProcessRequest($request)) {
+            return $response;
+        }
+
         $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('UmgVotacionBundle:Curso')->findAll();
-
+        
+        
         return array(
-            'entities' => $entities,
+            'dataTable' => $dataTable,
         );
     }
     /**

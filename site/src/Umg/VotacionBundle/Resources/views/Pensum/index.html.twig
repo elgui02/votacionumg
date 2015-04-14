@@ -5,31 +5,12 @@
 {% endblock %}
 
 {% block body -%}
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Año</th>
-                <th>Actiones</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('pensum_show', { 'id': entity.id }) }}">{{ entity.Anio }}</a></td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('pensum_show', { 'id': entity.id }) }}">Ver</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('pensum_edit', { 'id': entity.id }) }}">Editar</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<div class="table-responsive">
+    
+            <div class="table-bordered">
+                {{ addDataTable(dataTable) }}
+            </div>
+        </div>
             <a href="{{ path('pensum_new') }}" class='btn btn-primary'>
                 Nuevo pensum
             </a>

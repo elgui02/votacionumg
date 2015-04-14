@@ -25,14 +25,18 @@ class AlumnoController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+        $dataTable = $this->get('data_tables.manager')->getTable('alumnoTable');
+        if ($response = $dataTable->ProcessRequest($request)) {
+            return $response;
+        }
+
         $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('UmgVotacionBundle:Alumno')->findAll();
-
+        
+        
         return array(
-            'entities' => $entities,
+            'dataTable' => $dataTable,
         );
     }
     /**

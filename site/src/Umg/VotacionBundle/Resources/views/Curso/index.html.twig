@@ -5,28 +5,13 @@
 {% endblock %}
 
 {% block body -%}
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Curso</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('curso_show', { 'id': entity.id }) }}">{{ entity.Curso }}</a></td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('curso_edit', { 'id': entity.id }) }}">editar</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    
+            <div class="table-bordered">
+                {{ addDataTable(dataTable) }}
+            </div>
+        </div>
+        <br/>
+
             <a href="{{ path('curso_new') }}" class="btn btn-primary">
                 Nuevo curso
             </a>

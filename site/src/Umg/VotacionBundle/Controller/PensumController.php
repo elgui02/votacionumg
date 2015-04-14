@@ -25,14 +25,18 @@ class PensumController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+        $dataTable = $this->get('data_tables.manager')->getTable('pensumTable');
+        if ($response = $dataTable->ProcessRequest($request)) {
+            return $response;
+        }
+
         $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('UmgVotacionBundle:Pensum')->findAll();
-
+        
+        
         return array(
-            'entities' => $entities,
+            'dataTable' => $dataTable,
         );
     }
     /**
@@ -109,7 +113,7 @@ class PensumController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function showAction($id)
+    public function showAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -121,9 +125,26 @@ class PensumController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
+      /*  return array(
+            'entity'      => $entity,
+            'delete_form' => $deleteForm->createView(),
+        );*/
+        $request->request->set('id',$id);
+        $dataTable = $this->get('data_tables.manager')->getTable('showpensumTable');
+        if ($response = $dataTable->ProcessRequest($request)) {
+            return $response;
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        
+       /* 
+        return array(
+            'dataTable' => $dataTable,
+        );*/
         return array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
+            'dataTable' => $dataTable,
         );
     }
 

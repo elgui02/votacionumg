@@ -11,26 +11,26 @@ use Symfony\Component\Templating\EngineInterface;
 
 
 /**
- * Class CarreraTable
+ * Class CampusTable
  *
  * @package Umg\VotacionBundle\Model
  *
- * @DataTable\Table(id="carreraTable", displayLength=10)
+ * @DataTable\Table(id="campusTable", displayLength=10)
  */
-class CarreraTable extends QueryBuilderDataTable implements QueryBuilderDataTableInterface
+class CampusTable extends QueryBuilderDataTable implements QueryBuilderDataTableInterface
 {
     /**
      * @var string
      * @DataTable\Column(source="q.id", name="Nombre")
-     * @DataTable\Format(dataFields={"id":"q.id","carrera":"q.Carrera"}, template="UmgVotacionBundle:Carrera:nombre.html.twig")
+     * @DataTable\Format(dataFields={"id":"q.id","campus":"q.Campus"}, template="UmgVotacionBundle:Campus:nombre.html.twig")
      * @DataTable\DefaultSort()
      */
     public $id;
       
     /**
      * @var int
-     * @DataTable\Column(source="q.Carrera", name="Acciones")
-     * @DataTable\Format(dataFields={"id":"q.id"}, template="UmgVotacionBundle:Carrera:accionesindex.html.twig")
+     * @DataTable\Column(source="q.Campus", name="Acciones")
+     * @DataTable\Format(dataFields={"id":"q.id"}, template="UmgVotacionBundle:Campus:accionesindex.html.twig")
      */
     public $acciones;
     
@@ -49,7 +49,7 @@ class CarreraTable extends QueryBuilderDataTable implements QueryBuilderDataTabl
     public function getQueryBuilder(Request $request = null)
     {
         $userRepository = $this->container->get('doctrine.orm.entity_manager')
-            ->getRepository('UmgVotacionBundle:Carrera');
+            ->getRepository('UmgVotacionBundle:Campus');
         $qb = $userRepository->createQueryBuilder('q')
             ;
 

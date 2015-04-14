@@ -3,32 +3,13 @@
     <h1 class="page-title">Lista de campus</h1>
 {% endblock %}
 {% block body -%}
-
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Campus</th>
-                <th>Actiones</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('campus_show', { 'id': entity.id }) }}">{{ entity.Campus }}</a></td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('campus_show', { 'id': entity.id }) }}">Ver</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('campus_edit', { 'id': entity.id }) }}">Editar</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<div class="table-responsive">
+    
+            <div class="table-bordered">
+                {{ addDataTable(dataTable) }}
+            </div>
+        </div>
+        <br/>
             <a href="{{ path('campus_new') }}" class="btn btn-primary">
                 Nuevo campus
             </a>
