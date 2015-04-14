@@ -54,10 +54,37 @@ class CatedraticoController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
+            $em->getConnection()->beginTransaction();
+            try 
+            {
+                $em->persist($entity);
+                $em->flush();
 
-            return $this->redirect($this->generateUrl('catedratico_show', array('id' => $entity->getId())));
+                $userManager = $this->container->get('fos_user.user_manager');
+                $userAdmin = $userManager->createUser();
+
+                $userAdmin->setUsername($entity->getCodigo());
+                $userAdmin->setEmail('system@example.com');
+                $userAdmin->setPlainPassword($entity->getColegiado().$entity->getNit());
+                $userAdmin->setEnabled(true);
+                $userManager->updateUser($userAdmin, true);
+
+                $entity->setUsuario($userAdmin);
+                $em->persist($entity);
+                $em->flush();
+
+                $em->getConnection()->commit();
+                return $this->redirect($this->generateUrl('catedratico'));
+            }
+            catch (Exception $e) 
+            {
+                $em->getConnection()->rollback();
+                return array(
+                    'entity' => $entity,
+                    'form'   => $form->createView(),
+                );
+                throw $e;
+            }
         }
 
         return array(
@@ -80,7 +107,10 @@ class CatedraticoController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array(
+            'label' => 'Guardar',
+            'attr'  => array('class' => 'btn btn-primary'),
+        ));
 
         return $form;
     }
@@ -169,7 +199,10 @@ class CatedraticoController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array(
+            'label' => 'Actualizar',
+            'attr'  => array('class' => 'btn btn-primary'),
+        ));
 
         return $form;
     }

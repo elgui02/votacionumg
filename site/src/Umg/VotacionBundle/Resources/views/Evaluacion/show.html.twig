@@ -1,44 +1,46 @@
 {% extends '::base.html.twig' %}
 
-{% block body -%}
-    <h1>Evaluacion</h1>
+{% block titulo %}
+    <h1 class="page-title">{{entity.CampusCarrera}}</h1>
+    <p class="lead">Fecha inicio: {{ entity.FechaHora|date('Y-m-d H:i:s') }}<br />
+    Fecha finalización: {{ entity.FechaHoraFinal|date('Y-m-d H:i:s') }}</p>
+{% endblock %}
 
-    <table class="record_properties">
+{% block body -%}
+    <h2>{% if entity.Activa == 1 %} Activa {% else %} No Activa {% endif %}</h2>
+
+    <h1> Preguntas </h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Pregunta</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
         <tbody>
+        {% for pregunta in entity.getPregunta %}
             <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
+                <td>{{ pregunta.Pregunta }}</td>
+                <td>
+                    <ul>
+                        <li><a href="{{ path('pregunta_show', { 'id': pregunta.id }) }}">ver</a></li>
+                        <li><a href="{{path('pregunta_edit', { 'id': pregunta.id }) }}">editar</a></li>
+                    </ul>
+                </td>
             </tr>
-            <tr>
-                <th>Activa</th>
-                <td>{{ entity.Activa }}</td>
-            </tr>
-            <tr>
-                <th>Fechahora</th>
-                <td>{{ entity.FechaHora|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Fechahorafinal</th>
-                <td>{{ entity.FechaHoraFinal|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Campuscarrera_id</th>
-                <td>{{ entity.CampusCarreraid }}</td>
-            </tr>
+        {% endfor %}
         </tbody>
     </table>
-
         <ul class="record_actions">
     <li>
         <a href="{{ path('evaluacion') }}">
-            Back to the list
+            Regresar al listado
         </a>
     </li>
     <li>
         <a href="{{ path('evaluacion_edit', { 'id': entity.id }) }}">
-            Edit
+            Editar
         </a>
     </li>
-    <li>{{ form(delete_form) }}</li>
 </ul>
 {% endblock %}

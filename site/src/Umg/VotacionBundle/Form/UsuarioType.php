@@ -5,9 +5,8 @@ namespace Umg\VotacionBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Doctrine\ORM\EntityRepository;
 
-class EvaluacionType extends AbstractType
+class UsuarioType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -16,15 +15,10 @@ class EvaluacionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Activa')
-            ->add('FechaHora')
-            ->add('FechaHoraFinal')
-            ->add('campusCarrera','entity',array(
-                'class' => 'UmgVotacionBundle:CampusCarrera',
-                'query_builder' => function(EntityRepository $er) {
-                    return $er->findCarreraCoordinador();
-                },
-            ))
+            ->add('username')
+            ->add('email')
+            ->add('PlainPassword')
+            ->add('enabled')
         ;
     }
     
@@ -34,7 +28,7 @@ class EvaluacionType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Umg\VotacionBundle\Entity\Evaluacion'
+            'data_class' => 'Umg\VotacionBundle\Entity\Usuario'
         ));
     }
 
@@ -43,6 +37,6 @@ class EvaluacionType extends AbstractType
      */
     public function getName()
     {
-        return 'umg_votacionbundle_evaluacion';
+        return 'umg_votacionbundle_usuario';
     }
 }

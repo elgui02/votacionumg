@@ -35,6 +35,14 @@ class AlumnoTable extends QueryBuilderDataTable implements QueryBuilderDataTable
     public $nombre;
     
     /**
+     * @var string
+     * @DataTable\Column(source="q.Usuario", name="Usuario")
+     * @DataTable\Format(dataFields={"id":"q.id","usuario":"q.Usuario"}, template="UmgVotacionBundle:Alumno:usuario.html.twig")
+     * @DataTable\DefaultSort()
+     */
+    public $usuario;
+
+    /**
      * @var int
      * @DataTable\Column(source="q.Codigo", name="Acciones")
      * @DataTable\Format(dataFields={"id":"q.id"}, template="UmgVotacionBundle:Alumno:accionesindex.html.twig")

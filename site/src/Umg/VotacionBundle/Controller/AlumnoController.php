@@ -52,18 +52,47 @@ class AlumnoController extends Controller
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
+        if ($form->isValid()) 
+        {
 
-            return $this->redirect($this->generateUrl('alumno'));
+            $em = $this->getDoctrine()->getManager();
+            $em->getConnection()->beginTransaction();
+            try 
+            {
+                $em->persist($entity);
+                $em->flush();
+
+                $userManager = $this->container->get('fos_user.user_manager');
+                $userAdmin = $userManager->createUser();
+
+                $userAdmin->setUsername($entity->getCarne());
+                $userAdmin->setEmail('system@example.com');
+                $userAdmin->setPlainPassword($entity->getCarne());
+                $userAdmin->setEnabled(true);
+                $userManager->updateUser($userAdmin, true);
+
+                $entity->setUsuario($userAdmin);
+                $em->persist($entity);
+                $em->flush();
+
+                $em->getConnection()->commit();
+                return $this->redirect($this->generateUrl('alumno'));
+            } 
+            catch (Exception $e) 
+            {
+                $em->getConnection()->rollback();
+                return array(
+                    'entity' => $entity,
+                    'form'   => $form->createView(),
+                );
+                throw $e;
+            }
         }
 
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
+            return array(
+                'entity' => $entity,
+                'form'   => $form->createView(),
+            );
     }
 
     /**

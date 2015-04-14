@@ -85,4 +85,11 @@ tipopregunta_home:
     resource:   "@UmgVotacionBundle/Controller/TipoPreguntumController.php"
     type:       annotation
 
-    
+usuario_home:
+    resource:   "@UmgVotacionBundle/Controller/UsuarioController.php"
+    type:       annotation
+
+evaluacion_home:
+    resource:   "@UmgVotacionBundle/Controller/EvaluacionController.php"
+    type:       annotation
+   

@@ -1,34 +1,36 @@
 {% extends '::base.html.twig' %}
 
-{% block body -%}
-    <h1>Evaluacion list</h1>
+{% block titulo %}
+    <h1 class="page-title">Lista de evaluaciones</h1>
+{% endblock %}
 
-    <table class="records_list">
+
+{% block body -%}
+
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>carrera</th>
                 <th>Activa</th>
-                <th>Fechahora</th>
-                <th>Fechahorafinal</th>
-                <th>Campuscarrera_id</th>
-                <th>Actions</th>
+                <th>Fecha hora</th>
+                <th>Fecha hora final</th>
+                <th>Actiones</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('evaluacion_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.Activa }}</td>
+                <td><a href="{{ path('evaluacion_show', { 'id': entity.id }) }}">{{ entity.CampusCarrera }}</a></td>
+                <td>{% if  entity.Activa ==  1 %}Sí {% else %} No {% endif %}</td>
                 <td>{% if entity.FechaHora %}{{ entity.FechaHora|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if entity.FechaHoraFinal %}{{ entity.FechaHoraFinal|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.CampusCarreraid }}</td>
                 <td>
                 <ul>
                     <li>
-                        <a href="{{ path('evaluacion_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('evaluacion_show', { 'id': entity.id }) }}">ver</a>
                     </li>
                     <li>
-                        <a href="{{ path('evaluacion_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('evaluacion_edit', { 'id': entity.id }) }}">editar</a>
                     </li>
                 </ul>
                 </td>
@@ -37,11 +39,7 @@
         </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('evaluacion_new') }}">
-                Create a new entry
+            <a href="{{ path('evaluacion_new') }}" class="btn btn-primary">
+                Nueva encuesta
             </a>
-        </li>
-    </ul>
     {% endblock %}

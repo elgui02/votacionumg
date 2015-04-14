@@ -7,21 +7,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Umg\VotacionBundle\Entity\Evaluacion;
-use Umg\VotacionBundle\Form\EvaluacionType;
+use Umg\VotacionBundle\Entity\Usuario;
+use Umg\VotacionBundle\Form\UsuarioType;
 
 /**
- * Evaluacion controller.
+ * Usuario controller.
  *
- * @Route("/evaluacion")
+ * @Route("/usuario")
  */
-class EvaluacionController extends Controller
+class UsuarioController extends Controller
 {
 
     /**
-     * Lists all Evaluacion entities.
+     * Lists all Usuario entities.
      *
-     * @Route("/", name="evaluacion")
+     * @Route("/", name="usuario")
      * @Method("GET")
      * @Template()
      */
@@ -29,31 +29,32 @@ class EvaluacionController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('UmgVotacionBundle:Evaluacion')->findAll();
+        $entities = $em->getRepository('UmgVotacionBundle:Usuario')->findAll();
 
         return array(
             'entities' => $entities,
         );
     }
     /**
-     * Creates a new Evaluacion entity.
+     * Creates a new Usuario entity.
      *
-     * @Route("/", name="evaluacion_create")
+     * @Route("/", name="usuario_create")
      * @Method("POST")
-     * @Template("UmgVotacionBundle:Evaluacion:new.html.twig")
+     * @Template("UmgVotacionBundle:Usuario:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Evaluacion();
+        $entity = new Usuario();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            /*$em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('evaluacion_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('usuario_show', array('id' => $entity->getId())));*/
+            var_dump($request);
         }
 
         return array(
@@ -63,38 +64,42 @@ class EvaluacionController extends Controller
     }
 
     /**
-     * Creates a form to create a Evaluacion entity.
+     * Creates a form to create a Usuario entity.
      *
-     * @param Evaluacion $entity The entity
+     * @param Usuario $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Evaluacion $entity)
+    private function createCreateForm(Usuario $entity)
     {
-        $user = $this->get('security.context')->getToken()->getUser()->getUserName();
-        $form = $this->createForm(new EvaluacionType(array(),array('user' => $user)), $entity, array(
-            'action' => $this->generateUrl('evaluacion_create'),
+        $form = $this->createForm(new UsuarioType(), $entity, array(
+            'action' => $this->generateUrl('usuario_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array(
-            'label' => 'Guardar',
-            'attr'  => array('class' => 'btn btn-primary'),
-        ));
+        $form->add('submit', 'submit', array('label' => 'Create'));
 
         return $form;
     }
 
     /**
-     * Displays a form to create a new Evaluacion entity.
+     * Displays a form to create a new Usuario entity.
      *
-     * @Route("/new", name="evaluacion_new")
+     * @Route("/{id}/alumno", name="usuario_new_alumno")
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
+    public function newAction($id)
     {
-        $entity = new Evaluacion();
+        $em = $this->getDoctrine()->getManager();
+        $alumno = $em->getRepository('UmgVotacionBundle:Alumno')->find($id);
+
+        if (!$alumno) {
+            throw $this->createNotFoundException('Unable to find alumno entity.');
+        }
+        
+        $entity = new Usuario();
+        $entity->setUserName($alumno->getCarne());
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -104,9 +109,9 @@ class EvaluacionController extends Controller
     }
 
     /**
-     * Finds and displays a Evaluacion entity.
+     * Finds and displays a Usuario entity.
      *
-     * @Route("/{id}", name="evaluacion_show")
+     * @Route("/{id}", name="usuario_show")
      * @Method("GET")
      * @Template()
      */
@@ -114,10 +119,10 @@ class EvaluacionController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('UmgVotacionBundle:Evaluacion')->find($id);
+        $entity = $em->getRepository('UmgVotacionBundle:Usuario')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Evaluacion entity.');
+            throw $this->createNotFoundException('Unable to find Usuario entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -129,9 +134,9 @@ class EvaluacionController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Evaluacion entity.
+     * Displays a form to edit an existing Usuario entity.
      *
-     * @Route("/{id}/edit", name="evaluacion_edit")
+     * @Route("/{id}/edit", name="usuario_edit")
      * @Method("GET")
      * @Template()
      */
@@ -139,10 +144,10 @@ class EvaluacionController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('UmgVotacionBundle:Evaluacion')->find($id);
+        $entity = $em->getRepository('UmgVotacionBundle:Usuario')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Evaluacion entity.');
+            throw $this->createNotFoundException('Unable to find Usuario entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -156,42 +161,38 @@ class EvaluacionController extends Controller
     }
 
     /**
-    * Creates a form to edit a Evaluacion entity.
+    * Creates a form to edit a Usuario entity.
     *
-    * @param Evaluacion $entity The entity
+    * @param Usuario $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Evaluacion $entity)
+    private function createEditForm(Usuario $entity)
     {
-        $user = $this->get('security.context')->getToken()->getUser()->getUserName();
-        $form = $this->createForm(new EvaluacionType(array(),array('user' => $user)), $entity, array(
-            'action' => $this->generateUrl('evaluacion_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new UsuarioType(), $entity, array(
+            'action' => $this->generateUrl('usuario_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array(
-            'label' => 'Actualizar',
-            'attr'  => array('class' => 'btn btn-primary'),
-        ));
+        $form->add('submit', 'submit', array('label' => 'Update'));
 
         return $form;
     }
     /**
-     * Edits an existing Evaluacion entity.
+     * Edits an existing Usuario entity.
      *
-     * @Route("/{id}", name="evaluacion_update")
+     * @Route("/{id}", name="usuario_update")
      * @Method("PUT")
-     * @Template("UmgVotacionBundle:Evaluacion:edit.html.twig")
+     * @Template("UmgVotacionBundle:Usuario:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('UmgVotacionBundle:Evaluacion')->find($id);
+        $entity = $em->getRepository('UmgVotacionBundle:Usuario')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Evaluacion entity.');
+            throw $this->createNotFoundException('Unable to find Usuario entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -201,7 +202,7 @@ class EvaluacionController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('evaluacion_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('usuario_edit', array('id' => $id)));
         }
 
         return array(
@@ -211,9 +212,9 @@ class EvaluacionController extends Controller
         );
     }
     /**
-     * Deletes a Evaluacion entity.
+     * Deletes a Usuario entity.
      *
-     * @Route("/{id}", name="evaluacion_delete")
+     * @Route("/{id}", name="usuario_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -223,21 +224,21 @@ class EvaluacionController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('UmgVotacionBundle:Evaluacion')->find($id);
+            $entity = $em->getRepository('UmgVotacionBundle:Usuario')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Evaluacion entity.');
+                throw $this->createNotFoundException('Unable to find Usuario entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('evaluacion'));
+        return $this->redirect($this->generateUrl('usuario'));
     }
 
     /**
-     * Creates a form to delete a Evaluacion entity by id.
+     * Creates a form to delete a Usuario entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -246,7 +247,7 @@ class EvaluacionController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('evaluacion_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('usuario_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
