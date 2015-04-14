@@ -4,5 +4,23 @@
 {% endblock %}
 
 {% block body -%}
-Hello {{eva}}
+<h2> Encuestas activas </h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Carrera</th>
+            <th>Fecha finalización</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%for evaluacion in evaluaciones %}
+        <tr>
+            <td>{{evaluacion.CampusCarrera}}</td>
+            <td>{{evaluacion.FechaHoraFinal|date('Y-m-d H:i:s')}}</td>
+            <td>responder</td>
+        {% endfor %}            
+    </tbody>
+</table>
+
 {% endblock %}

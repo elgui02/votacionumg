@@ -17,10 +17,11 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $usr= $this->get('security.context')->getToken()->getUser();
-        $evaluacion = $em->getRepository('UmgVotacionBundle:Alumno')->findEvaluaciones($usr->getUserName());
+        $evaluacion = $em->getRepository('UmgVotacionBundle:Alumno')->findEvaluaciones($usr->getId());
         
         return $this->render('UmgVotacionBundle:Default:index.html.twig', array(
             'eva' => count($evaluacion),
+            'evaluaciones' => $evaluacion,
         ));
     }
 }
