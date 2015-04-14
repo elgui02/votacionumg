@@ -110,7 +110,7 @@ class CampusController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function showAction($id)
+    public function showAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -121,10 +121,20 @@ class CampusController extends Controller
         }
 
         $deleteForm = $this->createDeleteForm($id);
+        
+        $request->request->set('id',$id);
+        $dataTable = $this->get('data_tables.manager')->getTable('showcampusTable');
+        if ($response = $dataTable->ProcessRequest($request)) {
+            return $response;
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        
 
         return array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
+            'dataTable'   => $dataTable,
         );
     }
 
