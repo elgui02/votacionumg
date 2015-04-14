@@ -1,1 +1,8 @@
-Hello {{ name }}!
+{% extends '::base.html.twig' %}
+{% block titulo %}
+    <h1 class="page-title">Bienvenido al sistema de evaluación docente</h1>
+{% endblock %}
+
+{% block body -%}
+Hello {{eva}}
+{% endblock %}

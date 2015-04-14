@@ -1,5 +1,5 @@
-umg_votacion_homepage:
-    path:     /hello/{name}
+homepage:
+    path:     /
     defaults: { _controller: UmgVotacionBundle:Default:index }
 
 alumno_home:

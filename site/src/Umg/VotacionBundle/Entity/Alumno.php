@@ -15,7 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Umg\VotacionBundle\Entity\Alumno
  *
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Umg\VotacionBundle\Entity\AlumnoRepository")
  * @ORM\Table(name="Alumno", indexes={@ORM\Index(name="fk_Alumno_Usuario1_idx", columns={"Usuario_id"})})
  */
 class Alumno

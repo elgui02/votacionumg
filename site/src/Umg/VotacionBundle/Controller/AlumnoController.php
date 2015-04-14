@@ -66,7 +66,7 @@ class AlumnoController extends Controller
                 $userAdmin = $userManager->createUser();
 
                 $userAdmin->setUsername($entity->getCarne());
-                $userAdmin->setEmail('system@example.com');
+                $userAdmin->setEmail($entity->getCarne().'@example.com');
                 $userAdmin->setPlainPassword($entity->getCarne());
                 $userAdmin->setEnabled(true);
                 $userManager->updateUser($userAdmin, true);
