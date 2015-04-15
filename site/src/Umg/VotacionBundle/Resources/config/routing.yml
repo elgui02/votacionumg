@@ -2,6 +2,10 @@ umg_votacion_homepage:
     path:     /hello/{name}
     defaults: { _controller: UmgVotacionBundle:Default:index }
 
+cargararchivo_home:
+    path:   /cargar
+    defaults: {_controller: UmgVotacionBundle:CargarArchivo:importar}
+
 alumno_home:
     resource:   "@UmgVotacionBundle/Controller/AlumnoController.php"
     type:       annotation
@@ -92,4 +96,4 @@ usuario_home:
 evaluacion_home:
     resource:   "@UmgVotacionBundle/Controller/EvaluacionController.php"
     type:       annotation
-   
+
