@@ -61,6 +61,6 @@ class CargarArchivoController extends Controller
                 
             }
         }
-        return $this->render('UmgVotacionBundle:CargarArchivo:cargar.html.twig',array);
+        return $this->render('UmgVotacionBundle:CargarArchivo:cargar.html.twig');
     }
 }
