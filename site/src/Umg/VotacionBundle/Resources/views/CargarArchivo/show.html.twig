@@ -1,0 +1,27 @@
+{% extends '::base.html.twig' %}
+{% block titulo %}
+    <h1 class="page-title"> Visualización de Estudiantes </h1>
+{% endblock %}
+{% block body %}
+  <h3>Según Archivo </h3>
+  <form role="form" method="post" enctype="multipart/form-data" action='{{path('cargararchivo')}}'>
+        <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Carne</th>
+                <th>Nombre</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for line in tabla %}
+         <tr>
+              {% for campo in line %}
+              <td>{{campo}}</td>
+              {% endfor %}
+         </tr>
+         {%endfor%}
+        </tbody>
+        </table>
+  </form>
+  <hr/>
+{% endblock %}
