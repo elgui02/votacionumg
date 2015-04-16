@@ -7,9 +7,24 @@
   <form role="form" method="post" enctype="multipart/form-data" action='{{path('cargararchivo')}}'>
         <table class="table table-striped">
         <thead>
-            <tr>
+           {# <tr>
                 <th>Carne</th>
                 <th>Nombre</th>
+            </tr> #}
+            <tr>
+              <th>Carrera</th>
+              <th>{{ carrera[2] }}</th>
+              <th>{{ ResultCarrera }}</th>
+            </tr>
+            <tr>
+              <th>Código</th>
+              <th>{{ curso[2] }}</th>
+              <th>{{ ResultCurso }}</th>
+            </tr>
+            <tr>
+              <th>Catedratico</th>
+              <th>{{ docente[2] }}</th>
+              <th>{{ ResultCatedratico }}</th>
             </tr>
         </thead>
         <tbody>
@@ -23,5 +38,8 @@
         </tbody>
         </table>
   </form>
+  <a href="{{ path('carreraarchivo') }}">
+      Back to the list
+  </a>
   <hr/>
 {% endblock %}

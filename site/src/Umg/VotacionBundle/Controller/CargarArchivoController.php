@@ -8,15 +8,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Ddeboer\DataImport\Reader\ExcelReader;
 use Symfony\Component\HttpFoundation\Response;
+use Umg\VotacionBundle\Entity\Curso;
+use Umg\VotacionBundle\Form\CursoType;
 use PHPExcel;
 use PHPExcel_IOFactory;
 
-
-/**
- * CargarArchivo controller.
- *
- * @Route("/cargararchivo")
- */
 class CargarArchivoController extends Controller
 {
     public function indexAction()
@@ -31,6 +27,7 @@ class CargarArchivoController extends Controller
           $archivo =$request->files->get('archivo');
           #$this->showAction($archivo);
       }
+
       $inputFileName=$archivo;
       //  Read your Excel workbook
               try {
@@ -57,16 +54,90 @@ class CargarArchivoController extends Controller
                       foreach($rowData[0] as $k=>$v)
                     //echo "<td> fila".$row."- Col: ".($k+1)." = ".$v."<td/>";
                      // echo "<td>".$v."<td/>";
-                      $matriz[$row][$k]=$v;
+                    //  $matriz[$row][$k]=$v;
                       //echo ""<tr/> <table/>";
+
+//Obtencion del Codigo de la Carrea
                       $data =$rowData[0];
+                      if($row == 1)
+                      {
+                        $carrera[]=$data;
+                        foreach($carrera[0] as $j=>$v)
+                        if($j == 2)
+                        {
+                          $codigocarrera=$v;
+                        }
+                          $codecarrera=explode(' ',$codigocarrera);
+                      }
+//Obtencio del Codigo del Curso
+                      if($row == 2)
+                      {
+                        $curso[]=$data;
+                        foreach($curso[0] as $k=>$v)
+                        if($k == 2)
+                        {
+                        $codigocurso=$v;
+                        }
+                          $codecurso=explode( ' ',$codigocurso );
+                      }
+//Obtencion del Codigo de Catedratico
+                      if($row == 3)
+                      {
+                        $catedratico[]=$data;
+                        foreach($catedratico[0] as $m=>$v)
+                        if($m == 2)
+                        {
+                          $codigocatedratico=$v;
+                        }
+                        $codecatedratico=explode(' ',$codigocatedratico );
+                      }
+                      if($row > 4)
+                      {
                         $file[]= $data;
+                      }
                   }
+/*
+Consulta de Carrera
+*/
+        $Carrera=1;
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('UmgVotacionBundle:CampusCarrera')->findOneBy(array('Codigo'=>$Carrera));
+        $ResultCarrera = 'Existente Valida';
+        if (!$entity) {
+            $ResultCarrera = 'No Existe en la base de Datos';
+            //throw $this->createNotFoundException('No se encontro la Carrera.');
+        }
+/*
+Consulta de Curso
+*/
+        $entity1 = $em->getRepository('UmgVotacionBundle:PensumAnio')->findOneBy(array('Codigo'=>$codecurso[0]));
+        $ResultCurso = 'Existente Valida';
+        if (!$entity1) {
+            $ResultCurso = 'No Existe en la base de Datos';
+          //  throw $this->createNotFoundException('No se Encontro El curso.');
+        }
+/*
+Consulta de Catedratico
+*/
+        $entity2 = $em->getRepository('UmgVotacionBundle:Catedratico')->findOneBy(array('Codigo'=>$codecatedratico[0]));
+        $ResultCatedratico = 'Existente Valida';
+        if (!$entity2) {
+            $ResultCatedratico = 'No Existe en la base de Datos';
+            //echo '<hr><hr><hr><hr>no existe el dato';
+          //  throw $this->createNotFoundException('No se encontro el Catedratico');
+        }
 
-
-                      // $data = serialize($objPHPExcel);
-                      //print_r($objPHPExcel);
-                      //$tabla = unserialize($data);
-                      return $this->render('UmgVotacionBundle:CargarArchivo:show.html.twig',array('tabla' => $file, ));
+      // $data = serialize($objPHPExcel);
+      //print_r($objPHPExcel);
+      //$tabla = unserialize($data);
+      return $this->render('UmgVotacionBundle:CargarArchivo:show.html.twig',array(
+        'tabla'   => $file,
+        'carrera' => $carrera[0],
+        'curso'   => $curso[0],
+        'docente' => $catedratico[0],
+        'ResultCarrera'=> $ResultCarrera,
+        'ResultCurso'=> $ResultCurso,
+        'ResultCatedratico' => $ResultCatedratico,
+      ));
     }
 }
