@@ -6,6 +6,18 @@ ver_resultado:
     path: /{id}/evaluaciones
     defaults: { _controller: UmgVotacionBundle:Default:ver }
 
+evaluar:
+    path: /evaluar/{eid}/curso/{ccid}/alumno/{aid}
+    defaults: { _controller: UmgVotacionBundle:Default:evaluar }
+
+mostrar:
+    path: /mostrar/{eid}/curso/{ccid}/alumno/{aid}
+    defaults: { _controller: UmgVotacionBundle:Default:mostrar }
+
+insertar:
+    path: /insertar/{eid}/curso/{ccid}/alumno/{aid}
+    defaults: { _controller: UmgVotacionBundle:Default:insertar }
+
 cargararchivo_home:
     path:   /cargar
     defaults: {_controller: UmgVotacionBundle:CargarArchivo:importar}

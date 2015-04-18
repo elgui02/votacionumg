@@ -33,9 +33,9 @@ class AlumnoRepository extends EntityRepository
     {
         return $this->getEntityManager()
             ->createQueryBuilder()
-            ->select('cc')
-            ->from('UmgVotacionBundle:CatedraticoCurso','cc')
-            ->innerJoin('cc.carreraCurso','ccu')
+            ->select('ccu')
+            ->from('UmgVotacionBundle:CarreraCurso','ccu')
+            ->innerJoin('ccu.catedraticoCursos','cc')
             ->innerJoin('ccu.alumnoCursos','ac')
             ->innerJoin('ac.respuesta','r')
             ->innerJoin('r.preguntum','p')
@@ -43,7 +43,7 @@ class AlumnoRepository extends EntityRepository
             ->innerJoin('ac.alumno','a')
             ->where('e.id = :evaluacion')
             ->andWhere('a.Usuario_id = :alumno')
-            ->groupBy('r.Catedratico_id')
+            ->groupBy('ccu.id')
             ->setParameter('evaluacion',$evaluacion)
             ->setParameter('alumno',$alumno)
             ->getQuery()
@@ -55,9 +55,9 @@ class AlumnoRepository extends EntityRepository
     {
         $q = $this->getEntityManager()
             ->createQueryBuilder()
-            ->select('cc')
-            ->from('UmgVotacionBundle:CatedraticoCurso','cc')
-            ->innerJoin('cc.carreraCurso','ccu')
+            ->select('ccu')
+            ->from('UmgVotacionBundle:CarreraCurso','ccu')
+            ->innerJoin('ccu.catedraticoCursos','cc')
             ->innerJoin('ccu.alumnoCursos','ac')
             ->innerJoin('ac.respuesta','r')
             ->innerJoin('r.preguntum','p')
@@ -65,33 +65,34 @@ class AlumnoRepository extends EntityRepository
             ->innerJoin('ac.alumno','a')
             ->where('e.id = :evaluacion')
             ->andWhere('a.Usuario_id = :alumno')
-            ->groupBy('cc.id')
+            ->groupBy('ccu.id')
             ->setParameter('evaluacion',$evaluacion)
             ->setParameter('alumno',$alumno)
-            ->getQuery() 
+            ->getQuery()
             ->getResult()
             ;
         if( count($q) > 0 )
         {
+            $ids = array();
+            foreach($q as $lst)
+                $ids[] = $lst->getId();
 
             return $this->getEntityManager()
                 ->createQueryBuilder()
-                ->select('r')
-                ->from('UmgVotacionBundle:AlumnoCurso','r')
-                ->innerJoin('r.catedratico','c')
-                ->innerJoin('c.catedraticoCursos','cc')
-                ->innerJoin('cc.carreraCurso','cu')
-                ->innerJoin('cu.campusCarrera','cac')
-                ->innerJoin('cac.evaluacions','e')
-                ->innerJoin('cu.alumnoCursos','ac')
+                ->select('cc')
+                ->from('UmgVotacionBundle:CatedraticoCurso','cc')
+                ->innerJoin('cc.carreraCurso','ccu')
+                ->innerJoin('ccu.campusCarrera','cca')
+                ->innerJoin('cca.evaluacions','e')
+                ->innerJoin('ccu.alumnoCursos','ac')
                 ->innerJoin('ac.alumno','a')
                 ->where('e.id = :evaluacion')
                 ->andWhere('a.Usuario_id = :alumno')
-                ->andWhere($this->getEntityManager()->createQueryBuilder()->expr()->notIn('c.id',$q))
-                ->groupBy('c.id')
+                ->andWhere($this->getEntityManager()->createQueryBuilder()->expr()->notIn('cc.id',$ids))
+                ->groupBy('cc.id')
                 ->setParameter('evaluacion',$evaluacion)
                 ->setParameter('alumno',$alumno)
-                ->getQuery()
+                ->getQuery() 
                 ->getResult()
                 ;
         }
@@ -117,5 +118,26 @@ class AlumnoRepository extends EntityRepository
 
         }
 
+    }
+
+    public function findRespuestas($evaluacion,$alumno,$cc)
+    {
+        return $this->getEntityManager()
+            ->createQueryBuilder()
+            ->select('r')
+            ->from('UmgVotacionBundle:Respuestum','r')
+            ->innerJoin('r.alumnoCurso','ac')
+            ->innerJoin('ac.alumno','a')
+            ->innerJoin('r.preguntum','p')
+            ->innerJoin('p.evaluacion','e')
+            ->where('e.id = :evaluacion')
+            ->andWhere('a.Usuario_id = :alumno')
+            ->andWhere('ac.CarreraCurso_id = :ccur')
+            ->setParameter('evaluacion',$evaluacion)
+            ->setParameter('alumno',$alumno)
+            ->setParameter('ccur',$cc)
+            ->getQuery()
+            ->getResult()
+            ;
     }
 }

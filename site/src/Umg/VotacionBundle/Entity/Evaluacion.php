@@ -50,6 +50,7 @@ class Evaluacion
     /**
      * @ORM\OneToMany(targetEntity="Preguntum", mappedBy="evaluacion")
      * @ORM\JoinColumn(name="id", referencedColumnName="Evaluacion_id")
+     * @ORM\OrderBy({"TipoPregunta_id" = "ASC"})
      */
     protected $pregunta;
 
