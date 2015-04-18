@@ -2,6 +2,10 @@ homepage:
     path:     /
     defaults: { _controller: UmgVotacionBundle:Default:index }
 
+ver_resultado:
+    path: /{id}/evaluaciones
+    defaults: { _controller: UmgVotacionBundle:Default:ver }
+
 cargararchivo_home:
     path:   /cargar
     defaults: {_controller: UmgVotacionBundle:CargarArchivo:importar}

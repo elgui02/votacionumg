@@ -24,4 +24,19 @@ class DefaultController extends Controller
             'evaluaciones' => $evaluacion,
         ));
     }
+
+    public function verAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $evaluacion = $em->getRepository('UmgVotacionBundle:Evaluacion')->find($id);
+        $usr= $this->get('security.context')->getToken()->getUser();
+        $cc = $em->getRepository('UmgVotacionBundle:Alumno')->findRespuestasCatedratico($id,$usr->getId());
+        $cnc = $em->getRepository('UmgVotacionBundle:Alumno')->findCatedraticosNoCalificados($id,$usr->getId());
+
+        return $this->render('UmgVotacionBundle:Default:ver.html.twig', array(
+            'evaluacion' => $evaluacion,
+            'cc' => $cc,
+            'cnc' => $cnc,
+        ));
+    }
 }
