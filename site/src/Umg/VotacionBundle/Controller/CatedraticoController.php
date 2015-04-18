@@ -33,8 +33,8 @@ class CatedraticoController extends Controller
         }
 
         $em = $this->getDoctrine()->getManager();
-        
-        
+
+
         return array(
             'dataTable' => $dataTable,
         );
@@ -55,7 +55,7 @@ class CatedraticoController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->getConnection()->beginTransaction();
-            try 
+            try
             {
                 $em->persist($entity);
                 $em->flush();
@@ -64,7 +64,7 @@ class CatedraticoController extends Controller
                 $userAdmin = $userManager->createUser();
 
                 $userAdmin->setUsername($entity->getCodigo());
-                $userAdmin->setEmail('system@example.com');
+                $userAdmin->setEmail($entity->getCodigo().'cat@example.com');
                 $userAdmin->setPlainPassword($entity->getColegiado().$entity->getNit());
                 $userAdmin->setEnabled(true);
                 $userManager->updateUser($userAdmin, true);
@@ -76,7 +76,7 @@ class CatedraticoController extends Controller
                 $em->getConnection()->commit();
                 return $this->redirect($this->generateUrl('catedratico'));
             }
-            catch (Exception $e) 
+            catch (Exception $e)
             {
                 $em->getConnection()->rollback();
                 return array(

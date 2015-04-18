@@ -8,8 +8,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Ddeboer\DataImport\Reader\ExcelReader;
 use Symfony\Component\HttpFoundation\Response;
+use Umg\VotacionBundle\Entity\Carrera;
 use Umg\VotacionBundle\Entity\Curso;
-use Umg\VotacionBundle\Form\CursoType;
+use Umg\VotacionBundle\Entity\Catedratico;
+use Umg\VotacionBundle\Entity\PensumAnio;
 use PHPExcel;
 use PHPExcel_IOFactory;
 
@@ -20,6 +22,13 @@ class CargarArchivoController extends Controller
         return $this->render('UmgVotacionBundle:CargarArchivo:index.html.twig');
     }
 
+
+/*    public function cursoAction()
+    {
+        return $this->render('UmgVotacionBundle:CargarArchivo:asignarcurso.html.twig');
+        $cursopensum = new PensumAnio();
+        $cursopensum->setPensumAnio('')
+    }*/
     public function showAction(Request $request)
     {
       if($request->getMethod() == 'POST')
@@ -99,43 +108,43 @@ class CargarArchivoController extends Controller
 /*
 Consulta de Carrera
 */
-        $Carrera=1;
+      //  $Carrera=1;
+        $snc = $codecarrera[0];
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('UmgVotacionBundle:CampusCarrera')->findOneBy(array('Codigo'=>$Carrera));
-        $ResultCarrera = 'Existente Valida';
-        if (!$entity) {
-            $ResultCarrera = 'No Existe en la base de Datos';
-            //throw $this->createNotFoundException('No se encontro la Carrera.');
-        }
+        $carrera = $em->getRepository('UmgVotacionBundle:CampusCarrera')->findOneBy(array('Codigo'=>$snc));
 /*
 Consulta de Curso
 */
-        $entity1 = $em->getRepository('UmgVotacionBundle:PensumAnio')->findOneBy(array('Codigo'=>$codecurso[0]));
+        $codcur = $codecurso[0];
+
+
+        $curs = $em->getRepository('UmgVotacionBundle:PensumAnio')->findOneBy(array('Codigo'=> $codcur));
         $ResultCurso = 'Existente Valida';
-        if (!$entity1) {
-            $ResultCurso = 'No Existe en la base de Datos';
-          //  throw $this->createNotFoundException('No se Encontro El curso.');
-        }
+
 /*
 Consulta de Catedratico
 */
-        $entity2 = $em->getRepository('UmgVotacionBundle:Catedratico')->findOneBy(array('Codigo'=>$codecatedratico[0]));
-        $ResultCatedratico = 'Existente Valida';
-        if (!$entity2) {
-            $ResultCatedratico = 'No Existe en la base de Datos';
-            //echo '<hr><hr><hr><hr>no existe el dato';
-          //  throw $this->createNotFoundException('No se encontro el Catedratico');
-        }
+        $cc = explode(' - ',$catedratico[0][2]);
 
-      // $data = serialize($objPHPExcel);
-      //print_r($objPHPExcel);
-      //$tabla = unserialize($data);
+        $codcat = $codecatedratico[0];
+        var_dump($cc);
+        $cat = $em->getRepository('UmgVotacionBundle:Catedratico')->findOneBy(array('Codigo'=>$codcat));
+        $ResultCatedratico = 'Existente Valida';
+
+        $catcur = $em->getRepository('UmgVotacionBundle:CatedraticoCurso')->findOneBy(array(
+          'catedratico'=>$cat,
+          'carreraCurso'=>$curs,
+        ));
+
       return $this->render('UmgVotacionBundle:CargarArchivo:show.html.twig',array(
         'tabla'   => $file,
-        'carrera' => $carrera[0],
+        'snc'     => $snc,
+        'carrera' => $carrera,
         'curso'   => $curso[0],
         'docente' => $catedratico[0],
-        'ResultCarrera'=> $ResultCarrera,
+        'catedratico' => $cat,
+        'curs' => $curs,
+        'catcur' => $catcur,
         'ResultCurso'=> $ResultCurso,
         'ResultCatedratico' => $ResultCatedratico,
       ));

@@ -555,6 +555,6 @@ class Catedratico
 
     public function __toString()
     {
-        return $this->Codigo.' - '.$this->Nombre;
+      return $this->Codigo.' - '.$this->Nombre;      
     }
 }
