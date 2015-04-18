@@ -30,8 +30,8 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $evaluacion = $em->getRepository('UmgVotacionBundle:Evaluacion')->find($id);
         $usr= $this->get('security.context')->getToken()->getUser();
-        $cc = $em->getRepository('UmgVotacionBundle:Alumno')->findRespuestasCatedratico($id,$usr->getId());
-        $cnc = $em->getRepository('UmgVotacionBundle:Alumno')->findCatedraticosNoCalificados($id,$usr->getId());
+        $cc = $em->getRepository('UmgVotacionBundle:Alumno')->findRespuestasCurso($id,$usr->getId());
+        $cnc = $em->getRepository('UmgVotacionBundle:Alumno')->findCursosNoCalificados($id,$usr->getId());
 
         return $this->render('UmgVotacionBundle:Default:ver.html.twig', array(
             'evaluacion' => $evaluacion,
