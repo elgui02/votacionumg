@@ -552,4 +552,9 @@ class Catedratico
     {
         return array('id', 'Codigo', 'Nombre', 'Direccion', 'Nit', 'Colegiado', 'Especialidad', 'Universidad', 'Graduacion', 'Estudios', 'Logros', 'FechaNacimiento', 'Usuario_id');
     }
+
+    public function __toString()
+    {
+      return $this->Codigo.' - '.$this->Nombre;      
+    }
 }

@@ -7,27 +7,38 @@
   <form role="form" method="post" enctype="multipart/form-data" action='{{path('cargararchivo')}}'>
         <table class="table table-striped">
         <thead>
-           {# <tr>
-                <th>Carne</th>
-                <th>Nombre</th>
-            </tr> #}
             <tr>
               <th>Carrera</th>
-              <th>{{ carrera[2] }}</th>
-              <th>{{ ResultCarrera }}</th>
+              {% if carrera %}
+              <th>{{ carrera.Codigo }} - {{ carrera.Carrera }}</th>
+              {% else %}
+              <th>snc</th>
+              <th>No existe la carrera, por favor crearla </th>
+              {% endif %}
             </tr>
             <tr>
-              <th>Código</th>
+              <th>Curso</th>
+              {%if curs %}
+              <th>{{ curs.Codigo }} - {{ curs.Curso }}</th>
+              {% else %}
               <th>{{ curso[2] }}</th>
-              <th>{{ ResultCurso }}</th>
+              <th>No existe la curso, por favor crearlo </th>
+              {% endif %}
             </tr>
             <tr>
               <th>Catedratico</th>
-              <th>{{ docente[2] }}</th>
-              <th>{{ ResultCatedratico }}</th>
+              {%if catedratico %}
+              <th>{{ catedratico.Codigo }} - {{ catedratico.Nombre }}</th>
+              {% if catcur %}
+              <th> el docente se asigará al curso </th>
+              {%endif%}
+              {% else %}
+              <th><input type="text" value="{{ docente[2] }}"></th>
+              <th>No existe el docente {% if catcur %}, el docente se asigará al curso {%endif%} </th>
+              {% endif %}
             </tr>
         </thead>
-        <tbody>
+        {#  <tbody>
         {% for line in tabla %}
          <tr>
               {% for campo in line %}
@@ -35,10 +46,11 @@
               {% endfor %}
          </tr>
          {%endfor%}
-        </tbody>
+        </tbody>#}
         </table>
+        <h2><h2>
   </form>
-  <a href="{{ path('carreraarchivo') }}">
+  <a href="{# path('carreraarchivo') #}">
       Back to the list
   </a>
   <hr/>

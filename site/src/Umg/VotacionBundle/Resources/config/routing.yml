@@ -10,9 +10,9 @@ showarchivo:
     path:   /import/show
     defaults: {_controller: UmgVotacionBundle:CargarArchivo:show}
 
-carreraarchivo:
-    path:   /import/ver
-    defaults: {_controller: UmgVotacionBundle:CargarArchivo:ver}
+asignarcurso:
+    path:   /asignarcurso
+    defaults: {_controller: UmgVotacionBundle:CargarArchivo:curso}
 
 alumno_home:
     resource:   "@UmgVotacionBundle/Controller/AlumnoController.php"
