@@ -26,7 +26,8 @@
         "genemu/form-bundle": "2.2.*",
         "liuggio/excelbundle": "~2.0",
         "ddeboer/data-import": "@stable",
-        "phpoffice/phpexcel": "~1.8"
+        "phpoffice/phpexcel": "~1.8",
+        "ob/highcharts-bundle": "~1.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

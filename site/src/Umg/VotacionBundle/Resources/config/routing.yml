@@ -14,6 +14,10 @@ mostrar:
     path: /mostrar/{eid}/curso/{ccid}/alumno/{aid}
     defaults: { _controller: UmgVotacionBundle:Default:mostrar }
 
+chart:
+    path: /chart
+    defaults: { _controller: UmgVotacionBundle:Default:chart }
+
 insertar:
     path: /insertar/{eid}/curso/{ccid}/alumno/{aid}
     defaults: { _controller: UmgVotacionBundle:Default:insertar }
