@@ -16,6 +16,7 @@ class OpcionType extends AbstractType
     {
         $builder
             ->add('Opcion')
+            ->add('Punteo')
         ;
     }
     

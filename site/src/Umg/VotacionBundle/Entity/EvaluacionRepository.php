@@ -17,4 +17,22 @@ class EvaluacionRepository extends EntityRepository
         ->where('ca.Codigo = :codigo')
         ->setParameter('codigo', $user);
     }
+
+    public function findPunteoCatedraticoCarrera($catedratico,$carrera)
+    {
+        return $this->getEntityManager()
+            ->createQueryBuilder()
+            ->select('SUM(r.Punteo)/count(r.id) as calificacion')
+            ->from('UmgVotacionBundle:Respuestum','r')
+            ->innerJoin('r.preguntum','p')
+            ->innerJoin('p.evaluacion','e')
+            ->where('e.CampusCarrera_id = :carrera')
+            ->andWhere('r.Catedratico_id = :catedratico')
+            ->andWhere('r.Observacion = false')
+            ->groupBy('e.id')
+            ->setParameter('carrera',$carrera->getId())
+            ->setParameter('catedratico',$catedratico->getId())
+            ->getQuery()
+            ->getResult();
+    }
 }

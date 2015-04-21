@@ -116,6 +116,8 @@ class DefaultController extends Controller
                 $respuesta->setCatedratico($catedratico->getCatedratico());
                 $respuesta->setAlumnoCurso($acurso);
                 $respuesta->setObservacion(false);
+                $respuesta->setPunteo($opcion->getPunteo());
+                $respuesta->setPensumAnio($cc->getPensumAnio());
                 $em->persist($respuesta);
                 $em->flush();
 
