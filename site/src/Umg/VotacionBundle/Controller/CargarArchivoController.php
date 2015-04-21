@@ -193,11 +193,17 @@ for ($x = 0; $x<= $lista; $x++)
 Consulta de alumnos que si estan creados
 */
 
-        $codalum = $codigoestudiante;
+      /*  $codalum = $codigoestudiante;
         $consulta = 'select a from UmgVotacionBundle:Alumno a where a.Carne IN(:verifica)';
         $query = $em->createQuery($consulta);
         $query->setParameter('verifica', array_values($codalum));
-        $alumnosumg = $query->getResult();
+        $alumnosumg = $query->getResult();*/
+
+          $codalum = $codigoestudiante;
+          $consulta = 'select a from UmgVotacionBundle:Alumno a where a.Carne IN(:verifica)';
+          $query = $em->createQuery($consulta);
+          $query->setParameter('verifica', array_values($codalum));
+          $alumnosumg = $query->getResult();
         //var_dump($alumnosumg);
 
       return $this->render('UmgVotacionBundle:CargarArchivo:show.html.twig',array(

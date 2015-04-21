@@ -22,18 +22,18 @@ class ShowcampusTable extends QueryBuilderDataTable implements QueryBuilderDataT
     /**
      * @var string
      * @DataTable\Column(source="q.id", name="Código")
-     * @DataTable\Format(dataFields={"id":"q.id","codigo":"carrera.Codigo"}, template="UmgVotacionBundle:Pensum:shownombre.html.twig")
+     * @DataTable\Format(dataFields={"id":"q.id","codigo":"carrera.Codigo"}, template="UmgVotacionBundle:Campus:shownombre.html.twig")
      * @DataTable\DefaultSort()
      */
     public $id;
-      
+
      /**
      * @var string
      * @DataTable\Column(source="q.carrera.Carrera", name="Carrera")
      * @DataTable\DefaultSort()
      */
     public $carrera;
-    
+
      /**
      * @var string
      * @DataTable\Column(source="p.jornada.Jornada", name="Jornada")
@@ -43,15 +43,15 @@ class ShowcampusTable extends QueryBuilderDataTable implements QueryBuilderDataT
     /**
      * @var int
      * @DataTable\Column(source="q.Codigo", name="Acciones")
-     * @DataTable\Format(dataFields={"id":"q.id"}, template="UmgVotacionBundle:Pensum:showaccionesindex.html.twig")
+     * @DataTable\Format(dataFields={"id":"q.id"}, template="UmgVotacionBundle:Campus:accionesshow.html.twig")
      */
     public $acciones;
-    
+
     /**
      * @var bool hydrate results to doctrine objects
      */
     public $hydrateObjects = true;
-    
+
     /**
      * getQueryBuilder
      *
@@ -71,47 +71,4 @@ class ShowcampusTable extends QueryBuilderDataTable implements QueryBuilderDataT
 
         return $qb;
     }
-     
 }
-/*
-
-{% block body -%}
-    <h1> Lista de carreras </h1>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Código</th>
-                <th>Carrera</th>
-                <th>Jornada</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for carrera in entity.getCampusCarreras %}
-            <tr>
-                <td>{{ carrera.Codigo }}</td>
-                <td>{{ carrera.Carrera }}</td>
-                <td>{{ carrera.Jornada }}</td>
-                <td>
-                    <ul>
-                        <li><a href="{{ path('campuscarrera_show', { 'id': carrera.id }) }}">ver</a></li>
-                        <li><a href="{{ path('campuscarrera_edit', { 'id': carrera.id }) }}">editar</a></li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    <a href={{ path('campuscarrera_new', {'id': entity.id}) }} class="btn btn-primary">Asiganar carrera al campus</a>
-    <br />
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('campus') }}">
-            Regresar a la lista
-        </a>
-    </li>
-    <li><a href="{{ path('campus_edit', { 'id': entity.id }) }}">Editar</a></li>
-</ul>
-{% endblock %}
-
- *  */

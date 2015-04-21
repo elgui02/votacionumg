@@ -26,7 +26,7 @@
               {% endif %}
             </tr>
             <tr>
-              <th class="warning">Catedratico</th>
+              <th class="warning">Catedrático</th>
               {%if catedratico %}
               <th>{{ catedratico.Codigo }} - {{ catedratico.Nombre }}</th>
               {% if catcur %}
@@ -63,11 +63,11 @@
         </table>
         <h2><h2>
   </form>
-    <h3>Alumnos ya existentes</h3>
+    <h3>Alumnos Existentes</h3>
     <table  class="table table-striped">
         <tbody>
-        <td class="danger">Carne</td>
-        <td class="danger">Nombre</td>
+        <td class="danger">Carné</td>
+        <td class="danger">Alumno</td>
         {% for line in veralumno %}
         <tr>
         <td>
@@ -84,8 +84,8 @@
     <h3>Alumnos que se crearan y asignaran</h3>
     <table  class="table table-striped">
         <tbody>
-        <td class="success">Carne</td>
-        <td class="success">Nombre</td>
+        <td class="success">Carné</td>
+        <td class="success">Alumno</td>
         {% for i in 0..cantalum %}
         <tr>
         <td>

@@ -26,14 +26,14 @@ class ShowpensumTable extends QueryBuilderDataTable implements QueryBuilderDataT
      * @DataTable\DefaultSort()
      */
     public $id;
-      
+
      /**
      * @var string
      * @DataTable\Column(source="q.curso.Curso", name="Curso")
      * @DataTable\DefaultSort()
      */
     public $curso;
-    
+
      /**
      * @var string
      * @DataTable\Column(source="q.carrera.Carrera", name="Carrera")
@@ -46,12 +46,12 @@ class ShowpensumTable extends QueryBuilderDataTable implements QueryBuilderDataT
      * @DataTable\Format(dataFields={"id":"q.id"}, template="UmgVotacionBundle:Pensum:showaccionesindex.html.twig")
      */
     public $acciones;
-    
+
     /**
      * @var bool hydrate results to doctrine objects
      */
     public $hydrateObjects = true;
-    
+
     /**
      * getQueryBuilder
      *
@@ -71,59 +71,5 @@ class ShowpensumTable extends QueryBuilderDataTable implements QueryBuilderDataT
 
         return $qb;
     }
-     
+
 }
-
-
-/*
-{% extends '::base.html.twig' %}
-
-{% block titulo %}
-    <h1 class="page-title">Pensum: {{entity.Anio}}</h1>
-{% endblock %}
-
-{% block body -%}
-    <h1>Lista de cursos del pensum</h1>
-
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Código</th>
-                <th>Curso</th>
-                <th>Carrera</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for curso in entity.PensumAnios %}
-            <tr>
-                <td>{{ curso.Codigo }}</td>
-                <td>{{ curso.Curso }}</td>
-                <td>{{ curso.Carrera }}</td>
-                <td>
-                    <ul>
-                        <li><a href="{{ path('pensumanio_edit', { 'id': curso.id }) }}">editar</a></li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    <a href={{path('pensumanio_new', {'id':entity.id})}} class='btn btn-primary'>Asignar nuevo curso</a>
-    <br />
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('pensum') }}">
-            Regresar a la lista
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('pensum_edit', { 'id': entity.id }) }}">
-            Editar
-        </a>
-    </li>
-</ul>
-{% endblock %}
-
- *  */
