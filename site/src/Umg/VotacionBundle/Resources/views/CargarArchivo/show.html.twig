@@ -3,12 +3,12 @@
     <h1 class="page-title"> Visualización de Estudiantes </h1>
 {% endblock %}
 {% block body %}
-  <h3>Según Archivo </h3>
+  <h3>Encabezado </h3>
   <form role="form" method="post" enctype="multipart/form-data" action='{{path('cargararchivo')}}'>
         <table class="table table-striped">
         <thead>
             <tr>
-              <th>Carrera</th>
+              <th class="warning">Carrera</th>
               {% if carrera %}
               <th>{{ carrera.Codigo }} - {{ carrera.Carrera }}</th>
               {% else %}
@@ -17,7 +17,7 @@
               {% endif %}
             </tr>
             <tr>
-              <th>Curso</th>
+              <th class="warning">Curso</th>
               {%if curs %}
               <th>{{ curs.Codigo }} - {{ curs.Curso }}</th>
               {% else %}
@@ -26,7 +26,7 @@
               {% endif %}
             </tr>
             <tr>
-              <th>Catedratico</th>
+              <th class="warning">Catedratico</th>
               {%if catedratico %}
               <th>{{ catedratico.Codigo }} - {{ catedratico.Nombre }}</th>
               {% if catcur %}
@@ -37,6 +37,17 @@
               <th>No existe el docente {% if catcur %}, el docente se asigará al curso {%endif%} </th>
               {% endif %}
             </tr>
+
+            {#<tr>
+              <th class="warning">Alumno</th>
+              {%if alum %}
+              <th>{{ alum.Carne }} - {{ alum.Nombre }}</th>
+              {% else %}
+              <th><input type="text" value="{{ alumno[1]}}"></th>
+              <th><input type="text" value="{{ alumno[2] }}"></th>
+              <th>No existe el alumno </th>
+              {% endif %}
+            </tr>#}
         </thead>
         {#  <tbody>
         {% for line in tabla %}
@@ -47,9 +58,47 @@
          </tr>
          {%endfor%}
         </tbody>#}
+
+
         </table>
         <h2><h2>
   </form>
+    <h3>Alumnos ya existentes</h3>
+    <table  class="table table-striped">
+        <tbody>
+        <td class="danger">Carne</td>
+        <td class="danger">Nombre</td>
+        {% for line in veralumno %}
+        <tr>
+        <td>
+              {{line.Carne}}
+        </td>
+        <td>
+              {{line.Nombre}}
+        </td>
+        </tr>
+        {%endfor%}
+        </tbody>
+    </table>
+    </br>
+    <h3>Alumnos que se crearan y asignaran</h3>
+    <table  class="table table-striped">
+        <tbody>
+        <td class="success">Carne</td>
+        <td class="success">Nombre</td>
+        {% for i in 0..cantalum %}
+        <tr>
+        <td>
+              {{noalumno[i]}}
+        </td>
+        <td>
+              {{nomnoalumno[i]}}
+        </td>
+        </tr>
+        {%endfor%}
+        </tbody>
+    </table>
+    </br>
   <a href="{# path('carreraarchivo') #}">
       Back to the list
   </a>

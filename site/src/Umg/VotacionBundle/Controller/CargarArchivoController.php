@@ -100,11 +100,32 @@ class CargarArchivoController extends Controller
                         }
                         $codecatedratico=explode(' ',$codigocatedratico );
                       }
-                      if($row > 4)
+//Obtencion del Codigo de Alumnos
+                      if($row > 5)
                       {
                         $file[]= $data;
                       }
                   }
+
+                    $lista= $highestRow - 6;
+                    for ($contalum = 0; $contalum <= $lista; $contalum++)
+                    {
+                      foreach($file[$contalum] as $m=>$v)
+                      if($m == 1)
+                      {
+                        $codigoestudiante[]=$v;
+                      }
+                    }
+
+                    for ($contalum = 0; $contalum <= $lista; $contalum++)
+                    {
+                      foreach($file[$contalum] as $m=>$v)
+                      if($m == 2)
+                      {
+                        $nomestudiante[]=$v;
+                      }
+                    }
+                      //var_dump($nomestudiante);
 /*
 Consulta de Carrera
 */
@@ -116,8 +137,6 @@ Consulta de Carrera
 Consulta de Curso
 */
         $codcur = $codecurso[0];
-
-
         $curs = $em->getRepository('UmgVotacionBundle:PensumAnio')->findOneBy(array('Codigo'=> $codcur));
         $ResultCurso = 'Existente Valida';
 
@@ -125,9 +144,8 @@ Consulta de Curso
 Consulta de Catedratico
 */
         $cc = explode(' - ',$catedratico[0][2]);
-
         $codcat = $codecatedratico[0];
-        var_dump($cc);
+//        var_dump($cc);
         $cat = $em->getRepository('UmgVotacionBundle:Catedratico')->findOneBy(array('Codigo'=>$codcat));
         $ResultCatedratico = 'Existente Valida';
 
@@ -135,6 +153,52 @@ Consulta de Catedratico
           'catedratico'=>$cat,
           'carreraCurso'=>$curs,
         ));
+/*
+Consultar de Codigos de alumnos que no estan creados
+*/
+
+for ($x = 0; $x<= $lista; $x++)
+{
+  $coda = $codigoestudiante[$x];
+  $alum = $em->getRepository('UmgVotacionBundle:Alumno')->findOneBy(array('Carne'=> $coda));
+  $varalum[]=$alum;
+  $ResultAlumno = 'Existente Valida';
+  if(!$alum)
+  {
+    $noalumno[]=$coda;
+    //echo "estoy aca";
+  }
+}
+    $contandoalumnos=count($noalumno);
+    $cantalum=$contandoalumnos-1;
+    //var_dump($cantalum);
+/*
+Consulta de Nombres de alumnos que no estan creados
+*/
+
+for ($x = 0; $x<= $lista; $x++)
+{
+  $nom = $nomestudiante[$x];
+  $nomalum = $em->getRepository('UmgVotacionBundle:Alumno')->findOneBy(array('Nombre'=> $nom));
+  $varalum[]=$alum;
+  $ResultAlumno = 'Existente Valida';
+  if(!$nomalum)
+  {
+    $nomnoalumno[]=$nom;
+    //echo "estoy aca";
+  }
+}
+//var_dump($nomnoalumno);
+/*
+Consulta de alumnos que si estan creados
+*/
+
+        $codalum = $codigoestudiante;
+        $consulta = 'select a from UmgVotacionBundle:Alumno a where a.Carne IN(:verifica)';
+        $query = $em->createQuery($consulta);
+        $query->setParameter('verifica', array_values($codalum));
+        $alumnosumg = $query->getResult();
+        //var_dump($alumnosumg);
 
       return $this->render('UmgVotacionBundle:CargarArchivo:show.html.twig',array(
         'tabla'   => $file,
@@ -142,11 +206,19 @@ Consulta de Catedratico
         'carrera' => $carrera,
         'curso'   => $curso[0],
         'docente' => $catedratico[0],
+        'alumno' =>$file[0],
         'catedratico' => $cat,
         'curs' => $curs,
         'catcur' => $catcur,
+        'alum' => $alum,
+        'estudiante' => $codigoestudiante,
         'ResultCurso'=> $ResultCurso,
         'ResultCatedratico' => $ResultCatedratico,
+        'ResultAlumno' => $ResultAlumno,
+        'veralumno' => $alumnosumg,
+        'noalumno' => $noalumno,
+        'nomnoalumno' => $nomnoalumno,
+        'cantalum' => $cantalum,
       ));
     }
 }
