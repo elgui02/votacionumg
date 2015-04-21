@@ -63,7 +63,25 @@
         </table>
         <h2><h2>
   </form>
-    <h3>Alumnos Existentes</h3>
+    <h3>Alumnos Existentes y Asignados</h3>
+    <table  class="table table-striped">
+        <tbody>
+        <td class="warning">Carné</td>
+        <td class="warning">Alumno</td>
+        {% for line in noasigalumno %}
+        <tr>
+        <td>
+              {{line.Carne}}
+        </td>
+        <td>
+              {{line.Nombre}}
+        </td>
+        </tr>
+        {%endfor%}
+        </tbody>
+    </table>
+    </br>
+    <h3>Alumnos Existentes y No Asignados</h3>
     <table  class="table table-striped">
         <tbody>
         <td class="danger">Carné</td>

@@ -192,18 +192,33 @@ for ($x = 0; $x<= $lista; $x++)
 /*
 Consulta de alumnos que si estan creados
 */
+/*
+        $codalum = $codigoestudiante;
+        $consultab = 'select a from UmgVotacionBundle:Alumno a where a.Carne IN(:verifica)';
+        $queryb = $em->createQuery($consultab);
+        $queryb->setParameter('verifica', array_values($codalum));
+        $alumnosumgno = $queryb->getResult();*/
 
-      /*  $codalum = $codigoestudiante;
-        $consulta = 'select a from UmgVotacionBundle:Alumno a where a.Carne IN(:verifica)';
+        $codalum = $codigoestudiante;
+      //  $consulta = 'select c.Nombre, c.Carne from UmgVotacionBundle:AlumnoCurso a JOIN a.alumno c JOIN a.carreraCurso car JOIN car.pensumAnio pen WHERE pen.Codigo!=:codigocurso AND c.Carne IN(:carne)';
+        $consulta = 'SELECT a FROM UmgVotacionBundle:Alumno a INNER JOIN a.alumnoCursos c
+                    INNER JOIN c.carreraCurso car
+                    INNER JOIN car.pensumAnio pen
+                    WHERE pen.Codigo!=:codigocurso
+                    AND a.Carne IN(:carne)';
         $query = $em->createQuery($consulta);
-        $query->setParameter('verifica', array_values($codalum));
-        $alumnosumg = $query->getResult();*/
+        $query->setParameter('carne', array_values($codalum));
+        $query->setParameter('codigocurso', $codcur);
+        $alumnosumg = $query->getResult();
 
-          $codalum = $codigoestudiante;
-          $consulta = 'select a from UmgVotacionBundle:Alumno a where a.Carne IN(:verifica)';
-          $query = $em->createQuery($consulta);
-          $query->setParameter('verifica', array_values($codalum));
-          $alumnosumg = $query->getResult();
+/*
+consulta los que estan asginados al curso
+*/
+          $consulasignatura= 'SELECT c.Nombre, c.Carne FROM UmgVotacionBundle:AlumnoCurso a JOIN a.alumno c JOIN a.carreraCurso car JOIN car.pensumAnio pen WHERE c.Carne IN(:carne) AND pen.Codigo=:codigocurso ';
+          $queryasignatura=$em->createQuery($consulasignatura);
+          $queryasignatura->setParameter('carne',array_values($codalum));
+          $queryasignatura->setParameter('codigocurso', $codcur);
+          $noasigalumno =$queryasignatura->getResult();
         //var_dump($alumnosumg);
 
       return $this->render('UmgVotacionBundle:CargarArchivo:show.html.twig',array(
@@ -222,6 +237,7 @@ Consulta de alumnos que si estan creados
         'ResultCatedratico' => $ResultCatedratico,
         'ResultAlumno' => $ResultAlumno,
         'veralumno' => $alumnosumg,
+        'noasigalumno' => $noasigalumno,
         'noalumno' => $noalumno,
         'nomnoalumno' => $nomnoalumno,
         'cantalum' => $cantalum,
