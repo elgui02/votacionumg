@@ -27,6 +27,7 @@ class AppKernel extends Kernel
             new Brown298\DataTablesBundle\Brown298DataTablesBundle(),
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new Liuggio\ExcelBundle\LiuggioExcelBundle(),
+            new Ob\HighchartsBundle\ObHighchartsBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
