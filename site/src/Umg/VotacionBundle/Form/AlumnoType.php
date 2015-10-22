@@ -16,7 +16,9 @@ class AlumnoType extends AbstractType
     {
         $builder
             ->add('Nombre')
-            ->add('Carne')
+            ->add('Carne','number',array( 
+                'required'  =>  false,
+            ))
         ;
     }
     
